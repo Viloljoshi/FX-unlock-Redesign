@@ -75,14 +75,14 @@ function MktFeatures() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">— What we deliver</span>
+        <span className="section-eyebrow">What we deliver</span>
         <h2>Done-for-You Marketing That <span className="accent">Drives Results.</span></h2>
         <p className="lede">
           Forget struggling to create content or figure out what converts. Our team provides:
         </p>
         <div className="feature-grid" style={{ marginTop: 32 }}>
           <div className="feature-card">
-            <div className="feature-num">— 01</div>
+            <div className="feature-num">01</div>
             <h3>Custom branded video scripts &amp; creatives</h3>
             <p>
               We'll script, style, and produce video creatives that sound like you, not a broker. Whether you need ads, reels, or full-length explainers, our content team will create high-converting video assets based on proven formulas — adapted to your personality and audience. The result? More views, more clicks, and higher trust with your followers. We also have an AI Script generator launching soon.
@@ -90,7 +90,7 @@ function MktFeatures() {
             <a href="#" className="feature-link">Learn More <span className="arrow">→</span></a>
           </div>
           <div className="feature-card">
-            <div className="feature-num">— 02</div>
+            <div className="feature-num">02</div>
             <h3>High-converting funnels and landing pages</h3>
             <p>
               We don't use generic, one-size-fits-all pages. Our team designs fully customized funnels based on your audience — whether they're beginner traders in Southeast Asia, seasoned investors in Europe, or social-first communities. From opt-in pages to sales funnels, we build every touchpoint with one goal: maximum conversion. Localized messaging, region-specific compliance, and mobile-optimized design all come as standard.
@@ -98,7 +98,7 @@ function MktFeatures() {
             <a href="#" className="feature-link">Learn More <span className="arrow">→</span></a>
           </div>
           <div className="feature-card">
-            <div className="feature-num">— 03</div>
+            <div className="feature-num">03</div>
             <h3>Engaging social media campaigns</h3>
             <p>
               We create high-performing Meta (Facebook &amp; Instagram) ad campaigns that are tailored to your audience and your brand. From scroll-stopping headlines to persuasive ad copy and creatives, every campaign is designed to turn cold traffic into qualified leads. Your dedicated marketing manager handles everything — from audience targeting and ad setup to continuous A/B testing and optimization.
@@ -106,7 +106,7 @@ function MktFeatures() {
             <a href="#" className="feature-link">Learn More <span className="arrow">→</span></a>
           </div>
           <div className="feature-card">
-            <div className="feature-num">— 04</div>
+            <div className="feature-num">04</div>
             <h3>Exclusive lead magnets &amp; free training assets</h3>
             <p>
               We give you high-value, ready-made resources to use as lead magnets — think free mini-courses, eBooks, trading checklists, and more — all branded for your business. These assets help you capture more leads, increase engagement, and create an ongoing flow of prospects who are primed for conversion.
@@ -176,7 +176,7 @@ function MktLongTerm() {
   return (
     <section className="section dark">
       <div className="container">
-        <span className="section-eyebrow">— Built for the long game</span>
+        <span className="section-eyebrow">Built for the long game</span>
         <h2>Designed for Long-Term <span className="accent">Affiliate Success.</span></h2>
         <p className="lede">
           Most brokers offer cookie-cutter banners and generic creatives. We don't. FX Unlocked gives you the same level of creative strategy and support top marketing agencies charge thousands for — and we do it because your success is ours.
@@ -196,7 +196,7 @@ function MktNumbers() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">— Track record</span>
+        <span className="section-eyebrow">Track record</span>
         <h2>FX Unlocked <span className="accent">by Numbers.</span></h2>
         <div className="stats-strip" style={{ marginTop: 32 }}>
           <div className="stat-item">

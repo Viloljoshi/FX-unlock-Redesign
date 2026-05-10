@@ -26,7 +26,7 @@ function EduCourse() {
         <div className="course-shell">
           <div className="course-content">
             <div className="course-section">
-              <span className="section-eyebrow">— Last update: 24 April, 2025</span>
+              <span className="section-eyebrow">Last update: 24 April, 2025</span>
               <h3>Introduction to the Financial Markets</h3>
               <p>
                 Our FX trading course for beginners is meticulously crafted to equip you with the knowledge to begin your trading journey. The course will give you the perfect introduction to the financial markets, while also teaching you the basics of trading from using charting software, setting your trades, trading styles and risk management. The course includes 8 educational modules, 10 videos each teaching a vital trading skill, and a 1 hour bonus webinar on Trading Psychology.

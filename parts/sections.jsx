@@ -16,7 +16,7 @@ function PartnersMarquee() {
     <section className="marquee-section">
       <div className="container">
         <div className="marquee-eyebrow">
-          <h4>// Trusted by industry-leading brokers</h4>
+          <h4>Trusted by industry-leading brokers</h4>
           <span className="pill">8 partners · 12 platforms</span>
         </div>
       </div>
@@ -90,7 +90,7 @@ function FeatureBlock({ num, title, lede, body, bullets, mosaicProps, reverse, s
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="num">— {num}</p>
+            <p className="num">{num}</p>
             <h2 dangerouslySetInnerHTML={{ __html: title }} />
           </div>
           <p className="lede">{lede}</p>

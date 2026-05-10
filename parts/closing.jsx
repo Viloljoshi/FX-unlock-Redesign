@@ -34,7 +34,7 @@ function NumbersSection() {
       <div className="container" style={{ position: 'relative' }}>
         <div className="section-head" style={{ marginBottom: 16, alignItems: 'center' }}>
           <div>
-            <p className="num">— 04 / By the numbers</p>
+            <p className="num">04 · By the numbers</p>
             <h2>FX Unlocked, <em>by the numbers.</em></h2>
             <p className="lede" style={{ marginTop: 24 }}>
               Our vision is bold: to connect and empower educators, partners and traders on every continent
@@ -107,7 +107,7 @@ function Testimonials() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="num">— 05 / Testimonials</p>
+            <p className="num">05 · Testimonials</p>
             <h2>What our partners <em>are saying.</em></h2>
           </div>
           <p className="lede">Real words from FX educators, affiliates and IBs growing inside our network.</p>
@@ -125,7 +125,7 @@ function Testimonials() {
 function GetStarted() {
   return (
     <section className="cta-section" id="GetStarted">
-      <p className="num" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', margin: '0 0 24px' }}>✦ &nbsp;06 / Ready to grow</p>
+      <p className="num" style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', margin: '0 0 24px' }}>06 · Ready to grow</p>
       <h2>Ready to <em>unlock growth?</em></h2>
       <p>
         We're not just growing; we're revolutionizing the affiliate / IB experience in
@@ -155,7 +155,7 @@ function Footer() {
             <p>Floor 38, Media One Tower, Dubai Marina, UAE. Connecting creators, affiliates and brokers since 2014.</p>
           </div>
           <div className="foot-col">
-            <h5>// Pages</h5>
+            <h5>Pages</h5>
             <ul>
               <li><a href="#">Home</a></li>
               <li><a href="#aboutUs">About us</a></li>
@@ -166,7 +166,7 @@ function Footer() {
             </ul>
           </div>
           <div className="foot-col">
-            <h5>// Contact</h5>
+            <h5>Contact</h5>
             <ul>
               <li><a href="tel:+971585784483">+971 58 578 4483</a></li>
               <li><a href="mailto:hello@fx-unlocked.com">hello@fx-unlocked.com</a></li>
@@ -175,7 +175,7 @@ function Footer() {
             </ul>
           </div>
           <div className="foot-col">
-            <h5>// Traders</h5>
+            <h5>Traders</h5>
             <ul>
               <li><a href="#">FX courses</a></li>
               <li><a href="#">Live mentorship</a></li>

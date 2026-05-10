@@ -29,26 +29,26 @@ function AffIntro() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">— Maximise your revenue</span>
+        <span className="section-eyebrow">Maximise your revenue</span>
         <h2>Built for FX educators and <span className="accent">growing audiences.</span></h2>
         <p className="lede">
           Are you an FX content creator or educator with a growing audience but struggling to monetize your traffic effectively? FX Unlocked is here to help. We specialize in connecting you with top-tier Foreign Exchange Trading Platforms that are eager to partner/sponsor with influential Educators.
         </p>
         <div className="feature-grid" style={{ marginTop: 32 }}>
           <div className="feature-card">
-            <div className="feature-num">— 01</div>
+            <div className="feature-num">01</div>
             <h3>Maximising your revenue</h3>
             <p>With our relationships in the industry, and the hundreds of affiliates we already work with, we guarantee to get you a better deal.</p>
             <a href="contact-us.html" className="feature-link">Get Started <span className="arrow">→</span></a>
           </div>
           <div className="feature-card">
-            <div className="feature-num">— 02</div>
+            <div className="feature-num">02</div>
             <h3>Free Marketing Manager</h3>
             <p>Use our in-house FX Marketing Manager to help you build your social media campaigns, free of charge!</p>
             <a href="marketing.html" className="feature-link">Get Started <span className="arrow">→</span></a>
           </div>
           <div className="feature-card">
-            <div className="feature-num">— 03</div>
+            <div className="feature-num">03</div>
             <h3>Access to our FX Trading Courses</h3>
             <p>Whether you want to charge your audience for the course, or offer it for free, we will give you free access to our educational courses. This will help you grow your traffic.</p>
             <a href="education.html" className="feature-link">Get Started <span className="arrow">→</span></a>
@@ -63,7 +63,7 @@ function AffWhy() {
   return (
     <section className="section dark" id="why">
       <div className="container">
-        <span className="section-eyebrow">— Why FX Unlocked?</span>
+        <span className="section-eyebrow">Why FX Unlocked?</span>
         <h2>Why <span className="accent">FX Unlocked?</span></h2>
         <div className="feature-grid" style={{ marginTop: 32 }}>
           <div className="feature-card">
@@ -96,7 +96,7 @@ function AffSteps() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">— Three Simple Steps</span>
+        <span className="section-eyebrow">Three Simple Steps</span>
         <h2>Join the <span className="accent">fastest-growing</span> Forex affiliate network.</h2>
         <p className="lede">
           There's a reason hundreds of affiliates and IBs from around the world choose to work with us — and why we're on the fast track to becoming the largest Forex affiliate/IB network globally. Our global, multi-lingual support team, ability to obtain industry-leading CPA, and dedicated marketing support ensure that you maximize your earnings and grow your business effortlessly. Getting started is easy. Just follow the three simple steps below, and you'll be on your way to unlocking unparalleled growth in the world of Forex affiliate marketing.
@@ -133,7 +133,7 @@ function AffMonetize() {
   return (
     <section className="section dark">
       <div className="container">
-        <span className="section-eyebrow">— What you get</span>
+        <span className="section-eyebrow">What you get</span>
         <h2>Looking to maximise revenue on your <span className="accent">traffic?</span></h2>
         <p className="lede">
           We guarantee we will beat any deal you're currently receiving, whether you are working on a CPA or Rebates model.
@@ -168,7 +168,7 @@ function AffPlatforms() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">— Trading Platforms</span>
+        <span className="section-eyebrow">Trading Platforms</span>
         <h2>Are you a <span className="accent">Trading Platform?</span></h2>
         <div className="feature-grid" style={{ marginTop: 32 }}>
           <div className="feature-card">

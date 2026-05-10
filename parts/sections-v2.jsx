@@ -54,7 +54,7 @@ function FeatureBlockV2({ num, title, lede, body, bullets, cardProps, reverse, s
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="num">— {num}</p>
+            <p className="num">{num}</p>
             <h2 dangerouslySetInnerHTML={{ __html: title }} />
           </div>
           <p className="lede">{lede}</p>

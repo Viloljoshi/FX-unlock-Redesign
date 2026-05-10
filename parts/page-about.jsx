@@ -27,7 +27,7 @@ function AboutMission() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">— Our Mission</span>
+        <span className="section-eyebrow">Our Mission</span>
         <h2>About <span className="accent">FX Unlocked.</span></h2>
         <p className="lede">
           At FX Unlocked, we understand the dynamic world of Foreign Exchange (FX) and the immense potential it holds. Our mission is to create powerful partnerships between FX Educators and Leading FX trading platforms, driving mutual growth and success. Whether you're an existing Affiliate looking for a more attractive deal (CPA/Rebates), or you're an aspiring Trader looking for a comprehensive Trading course, FX Unlocked has you covered.
@@ -83,7 +83,7 @@ function AboutNumbers() {
   return (
     <section className="section dark">
       <div className="container">
-        <span className="section-eyebrow">— By the Numbers</span>
+        <span className="section-eyebrow">By the Numbers</span>
         <h2>FX Unlocked <span className="accent">by Numbers.</span></h2>
         <p className="lede">
           At FX Unlocked, our vision is bold: to connect and empower educators, partners and traders on every continent and grow our network to 1000+ partners by mid-2026. With over a decade of expertise in the Foreign Exchange industry, we are well on our way to achieving this goal.
