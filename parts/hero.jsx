@@ -4,33 +4,10 @@ const { useState, useEffect, useRef } = React;
 function Logo() {
   return (
     <a href="index.html" className="logo">
-      <svg className="logo-icon" viewBox="0 0 60 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="logoGrad" x1="0" y1="0" x2="60" y2="54" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#22d3ee"/>
-            <stop offset="45%" stopColor="#6366f1"/>
-            <stop offset="100%" stopColor="#a855f7"/>
-          </linearGradient>
-          <clipPath id="logoUpper">
-            <rect x="0" y="0" width="60" height="27"/>
-          </clipPath>
-          <clipPath id="logoLower">
-            <rect x="0" y="27" width="60" height="27"/>
-          </clipPath>
-        </defs>
-        {/* Hex2 (lower-right) — back portion, drawn first */}
-        <path d="M55,33 L46,47 L34,47 L25,33 L34,19 L46,19 Z"
-              stroke="url(#logoGrad)" strokeWidth="5" strokeLinejoin="round"
-              clipPath="url(#logoUpper)"/>
-        {/* Hex1 (upper-left) — always in front in overlap's upper half */}
-        <path d="M35,21 L26,35 L14,35 L5,21 L14,7 L26,7 Z"
-              stroke="url(#logoGrad)" strokeWidth="5" strokeLinejoin="round"/>
-        {/* Hex2 (lower-right) — front portion, drawn over hex1 in lower half */}
-        <path d="M55,33 L46,47 L34,47 L25,33 L34,19 L46,19 Z"
-              stroke="url(#logoGrad)" strokeWidth="5" strokeLinejoin="round"
-              clipPath="url(#logoLower)"/>
-      </svg>
-      <span>FX<strong style={{fontWeight:700}}>Unlocked</strong></span>
+      <img src="fx-icon.png" alt="" className="logo-mark-img" />
+      <span className="logo-text">
+        <span className="lt-fx">FX</span><span className="lt-un">Unlocked</span>
+      </span>
     </a>
   );
 }
@@ -143,13 +120,9 @@ function Ticker({ pair, quote, basePrice, delta, up, flag }) {
 function HeroForm() {
   const [role, setRole] = useState('');
   return (
-    <div className="form-card glass">
-      <div className="form-card-bar"></div>
-      <div className="form-card-hd">
-        <span className="form-badge">✦ Free · No commitment</span>
-        <h3>Get started today</h3>
-        <p className="sub">Tell us a bit about you — we'll match you with the right deal.</p>
-      </div>
+    <div className="form-card">
+      <h3>Get started today</h3>
+      <p className="sub">Tell us a bit about you — we'll match you with the right deal.</p>
 
       <div className="field">
         <label>Full name</label>
@@ -164,7 +137,7 @@ function HeroForm() {
         <div className="field">
           <label>Country</label>
           <select defaultValue="">
-            <option value="" hidden>Select country</option>
+            <option value="" hidden>Select</option>
             <option>United Arab Emirates</option>
             <option>United Kingdom</option>
             <option>United States</option>
@@ -177,7 +150,7 @@ function HeroForm() {
 
       <div className="form-row">
         <div className="field">
-          <label>I am a...</label>
+          <label>Category</label>
           <select value={role} onChange={e=>setRole(e.target.value)}>
             <option value="" hidden>Affiliate / IB / Platform</option>
             <option value="affiliate">Affiliate</option>
@@ -188,18 +161,14 @@ function HeroForm() {
         </div>
         <div className="field">
           <label>Phone number</label>
-          <input type="tel" placeholder="+971 50 123 4567" autoComplete="tel"/>
-          <small>Include country code · e.g. +971</small>
+          <input type="text" placeholder="+971 50 123 4567" autoComplete="tel"/>
+          <small>Include country code, +971 ...</small>
         </div>
       </div>
 
       <button type="button" className="submit-btn">
-        Send my enquiry
-        <svg className="submit-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
+        Send Message <span>→</span>
       </button>
-      <p className="form-note">We respond within 24 hours · Your data is safe with us</p>
     </div>
   );
 }
