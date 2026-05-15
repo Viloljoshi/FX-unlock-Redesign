@@ -384,17 +384,20 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--display);
   font-weight: 500;
   font-size: clamp(48px, 7.4vw, 116px);
-  line-height: 0.95;
+  line-height: 1.08;
   letter-spacing: -0.04em;
   margin: 24px 0 28px;
   color: #fff;
   text-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  overflow: visible;
 }
 .hero h1 .accent {
   font-style: italic;
   font-weight: 400;
   background: linear-gradient(100deg, #ffffff 0%, #ffd6f5 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: inline-block;
+  padding-bottom: 0.1em;
 }
 .hero-sub {
   font-size: 17px; line-height: 1.55;
@@ -712,17 +715,21 @@ button { font-family: inherit; cursor: pointer; }
 .section-head h2 {
   font-family: var(--display);
   font-size: clamp(40px, 5vw, 76px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   font-weight: 500;
   margin: 0;
+  padding-bottom: 0.08em; /* stops descenders being clipped by background-clip:text */
   color: var(--ink);
+  overflow: visible;
 }
 .section-head h2 em {
   font-style: italic;
   font-weight: 400;
   background: var(--brand-grad);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  padding-bottom: 0.1em;
+  display: inline-block; /* padding-bottom only works on inline-block with background-clip */
 }
 .section-head .lede {
   font-size: 17px;
@@ -820,7 +827,7 @@ button { font-family: inherit; cursor: pointer; }
 .dc-bigprice {
   font-family: var(--display);
   font-size: clamp(56px, 7vw, 92px);
-  line-height: 0.95;
+  line-height: 1.06;
   letter-spacing: -0.045em;
   font-weight: 500;
   background: var(--brand-grad);
@@ -1047,7 +1054,7 @@ button { font-family: inherit; cursor: pointer; }
 .cta-section h2 {
   font-family: var(--display);
   font-size: clamp(40px, 6vw, 96px);
-  line-height: 0.98;
+  line-height: 1.06;
   letter-spacing: -0.04em;
   font-weight: 500;
   margin: 24px 0 24px;
@@ -1140,7 +1147,7 @@ button { font-family: inherit; cursor: pointer; }
 .sc-copy h2 {
   font-family: var(--display);
   font-size: clamp(40px, 5vw, 76px);
-  line-height: 0.98;
+  line-height: 1.06;
   letter-spacing: -0.035em;
   font-weight: 500;
   margin: 18px 0 24px;

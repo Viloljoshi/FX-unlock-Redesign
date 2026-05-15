@@ -30,16 +30,19 @@
   font-family: var(--display);
   font-weight: 500;
   font-size: clamp(40px, 6vw, 80px);
-  line-height: 1.0;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   margin: 0 0 18px;
   color: #fff;
   max-width: 880px;
+  overflow: visible;
 }
 .page-hero h1 .accent {
   font-style: italic; font-weight: 400;
   background: linear-gradient(100deg, #ffffff 0%, #ffd6f5 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: inline-block;
+  padding-bottom: 0.1em;
 }
 .page-hero p.lead {
   font-size: 18px; line-height: 1.55;
@@ -92,6 +95,8 @@
   font-style: italic; font-weight: 400;
   background: var(--brand-grad);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: inline-block;
+  padding-bottom: 0.1em;
 }
 .section .lede {
   font-size: 17px; line-height: 1.6; color: var(--ink-mute);
