@@ -4,14 +4,33 @@ const { useState, useEffect, useRef } = React;
 function Logo() {
   return (
     <a href="index.html" className="logo">
-      <span className="logo-mark">
-        <svg viewBox="0 0 16 16" fill="none">
-          <path d="M5 7V5a3 3 0 0 1 6 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-          <rect x="3.5" y="7" width="9" height="6.5" rx="1.4" stroke="currentColor" strokeWidth="1.6"/>
-          <circle cx="8" cy="10.2" r="1.1" fill="currentColor"/>
-        </svg>
-      </span>
-      <span>FX <span className="lock">Unlocked</span></span>
+      <svg className="logo-icon" viewBox="0 0 60 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="60" y2="54" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#22d3ee"/>
+            <stop offset="45%" stopColor="#6366f1"/>
+            <stop offset="100%" stopColor="#a855f7"/>
+          </linearGradient>
+          <clipPath id="logoUpper">
+            <rect x="0" y="0" width="60" height="27"/>
+          </clipPath>
+          <clipPath id="logoLower">
+            <rect x="0" y="27" width="60" height="27"/>
+          </clipPath>
+        </defs>
+        {/* Hex2 (lower-right) — back portion, drawn first */}
+        <path d="M55,33 L46,47 L34,47 L25,33 L34,19 L46,19 Z"
+              stroke="url(#logoGrad)" strokeWidth="5" strokeLinejoin="round"
+              clipPath="url(#logoUpper)"/>
+        {/* Hex1 (upper-left) — always in front in overlap's upper half */}
+        <path d="M35,21 L26,35 L14,35 L5,21 L14,7 L26,7 Z"
+              stroke="url(#logoGrad)" strokeWidth="5" strokeLinejoin="round"/>
+        {/* Hex2 (lower-right) — front portion, drawn over hex1 in lower half */}
+        <path d="M55,33 L46,47 L34,47 L25,33 L34,19 L46,19 Z"
+              stroke="url(#logoGrad)" strokeWidth="5" strokeLinejoin="round"
+              clipPath="url(#logoLower)"/>
+      </svg>
+      <span>FX<strong style={{fontWeight:700}}>Unlocked</strong></span>
     </a>
   );
 }

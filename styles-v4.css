@@ -141,16 +141,14 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 16px;
   color: inherit;
 }
-.logo-mark {
-  width: 28px; height: 28px;
-  display: grid; place-items:center;
-  border-radius: 8px;
-  background: var(--brand-grad);
-  color: #fff;
-  box-shadow: 0 6px 16px -6px rgba(51,61,168,0.5);
+.logo-icon {
+  width: 38px;
+  height: 34px;
+  flex-shrink: 0;
+  display: block;
 }
-.logo-mark svg { width: 14px; height: 14px; }
-.logo span.lock { opacity: 0.85; font-weight: 400; }
+/* Text adapts to nav state automatically via color: inherit */
+.nav.scrolled .logo { color: #fff; }
 
 .nav-links {
   display: flex; align-items:center; gap: 28px;
@@ -304,9 +302,9 @@ button { font-family: inherit; cursor: pointer; }
 .fx-chip .fc-pair { font-weight: 600; letter-spacing: 0.04em; }
 .fx-chip .fc-up { color: #c0ffe2; font-weight: 600; }
 .fx-chip .fc-dn { color: #ffd1de; font-weight: 600; }
-.fx-chip.c1 { top: 22%; right: 38%; animation-delay: 0s; }
-.fx-chip.c2 { top: 58%; right: 6%; animation-delay: 2s; }
-.fx-chip.c3 { top: 12%; right: 8%; animation-delay: 4s; }
+.fx-chip.c1 { top: 68%; left: 4%; animation-delay: 0s; }
+.fx-chip.c2 { top: 22%; left: 6%; animation-delay: 2s; }
+.fx-chip.c3 { top: 46%; left: 28%; animation-delay: 4s; }
 @keyframes chipFloat {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }
@@ -393,8 +391,9 @@ button { font-family: inherit; cursor: pointer; }
   overflow: visible;
 }
 .hero h1 .accent {
-  color: #7de8ff;
+  color: #fff;
   font-weight: 500;
+  text-shadow: 0 0 48px rgba(189,224,255,0.7), 0 0 100px rgba(139,92,246,0.3);
 }
 .hero-sub {
   font-size: 17px; line-height: 1.55;
@@ -573,14 +572,14 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ============ GLASS FORM CARD — hero glassmorphism variant ============ */
 .form-card.glass {
-  background: rgba(255,255,255,0.09);
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(20, 24, 70, 0.55);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.18);
   box-shadow:
-    0 2px 0 rgba(255,255,255,0.18) inset,
-    0 24px 64px -24px rgba(0,0,0,0.30),
-    0 0 0 0.5px rgba(255,255,255,0.08);
+    0 2px 0 rgba(255,255,255,0.12) inset,
+    0 32px 80px -24px rgba(0,0,0,0.45),
+    0 0 0 0.5px rgba(255,255,255,0.06);
   color: #fff;
 }
 .form-card.glass .form-card-bar {
@@ -720,7 +719,7 @@ button { font-family: inherit; cursor: pointer; }
 .section-head h2 em {
   font-style: normal;
   font-weight: 500;
-  color: var(--cyan);
+  color: #5b6bce;
 }
 .section-head .lede {
   font-size: 17px;
