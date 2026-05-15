@@ -392,15 +392,8 @@ button { font-family: inherit; cursor: pointer; }
   overflow: visible;
 }
 .hero h1 .accent {
-  font-style: italic;
-  font-weight: 400;
-  background: linear-gradient(100deg, #ffffff 0%, #ffd6f5 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block;
-  padding-top: 0.12em;
-  margin-top: -0.12em;
-  padding-bottom: 0.18em;
-  margin-bottom: -0.18em;
+  color: #7de8ff;
+  font-weight: 500;
 }
 .hero-sub {
   font-size: 17px; line-height: 1.55;
@@ -710,8 +703,7 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  background: var(--brand-grad);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--cyan);
   margin: 0 0 20px;
   font-weight: 500;
   display: inline-block;
@@ -723,20 +715,12 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: -0.03em;
   font-weight: 500;
   margin: 0;
-  padding-bottom: 0.08em; /* stops descenders being clipped by background-clip:text */
   color: var(--ink);
-  overflow: visible;
 }
 .section-head h2 em {
-  font-style: italic;
-  font-weight: 400;
-  background: var(--brand-grad);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block;
-  padding-top: 0.12em;
-  margin-top: -0.12em;
-  padding-bottom: 0.18em;
-  margin-bottom: -0.18em;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--cyan);
 }
 .section-head .lede {
   font-size: 17px;
@@ -834,11 +818,10 @@ button { font-family: inherit; cursor: pointer; }
 .dc-bigprice {
   font-family: var(--display);
   font-size: clamp(56px, 7vw, 92px);
-  line-height: 1.06;
+  line-height: 1.1;
   letter-spacing: -0.045em;
   font-weight: 500;
-  background: var(--brand-grad);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--cyan);
 }
 .dc-meta {
   display: flex; gap: 14px; align-items: center;
@@ -919,7 +902,7 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0 0 16px;
   color: var(--ink);
 }
-.num-stat .big .plus { background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.num-stat .big .plus { color: var(--cyan); }
 .num-stat .label {
   font-family: var(--display);
   font-size: 16px;
@@ -990,14 +973,12 @@ button { font-family: inherit; cursor: pointer; }
 .t-card .quote-mark {
   font-family: var(--mono);
   font-size: 11px;
-  background: var(--brand-grad);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--cyan);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   margin-bottom: 20px;
   font-weight: 600;
   display: inline-block;
-  padding-bottom: 0.14em;
 }
 .t-card p {
   font-size: 16px; line-height: 1.65;
@@ -1022,12 +1003,10 @@ button { font-family: inherit; cursor: pointer; }
 .t-card .name { font-family: var(--display); font-weight: 600; font-size: 14px; color: var(--ink); }
 .t-card .role { color: var(--ink-mute); font-size: 11px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.14em; margin-top: 3px;}
 .t-card .read-more {
-  background: var(--brand-grad);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--cyan);
   font-size: 11px; cursor: pointer;
   margin-bottom: 16px;
   display: inline-block;
-  padding-bottom: 0.14em;
   font-family: var(--mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -1071,15 +1050,9 @@ button { font-family: inherit; cursor: pointer; }
   color: #fff;
 }
 .cta-section h2 em {
-  font-style: italic;
-  font-weight: 400;
-  background: linear-gradient(100deg, #ffffff 0%, #ffd6f5 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block;
-  padding-top: 0.12em;
-  margin-top: -0.12em;
-  padding-bottom: 0.18em;
-  margin-bottom: -0.18em;
+  font-style: normal;
+  font-weight: 500;
+  color: #7de8ff;
 }
 .cta-section p {
   font-size: 17px; line-height: 1.6;
@@ -1169,14 +1142,9 @@ button { font-family: inherit; cursor: pointer; }
   color: #fff;
 }
 .sc-copy h2 em {
-  font-style: italic; font-weight: 400;
-  background: linear-gradient(100deg,#9bf3ff,#ffd1f7);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block;
-  padding-top: 0.12em;
-  margin-top: -0.12em;
-  padding-bottom: 0.18em;
-  margin-bottom: -0.18em;
+  font-style: normal;
+  font-weight: 500;
+  color: #7de8ff;
 }
 .sc-copy .lede {
   font-size: 17px; line-height: 1.65;
@@ -1252,13 +1220,7 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 20px; font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
-  background: linear-gradient(100deg,#9bf3ff,#fff,#ffd1f7);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block;
-  padding-top: 0.1em;
-  margin-top: -0.1em;
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
+  color: #fff;
 }
 .sc-card p {
   font-size: 12px; line-height: 1.55;
