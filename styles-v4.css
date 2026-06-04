@@ -135,8 +135,8 @@ button { font-family: inherit; cursor: pointer; }
 .logo-text .lt-un { font-weight: 400; opacity: 0.92; letter-spacing: -0.005em; }
 
 .nav-links {
-  display: flex; align-items:center; gap: 20px;
-  font-size: 12px;
+  display: flex; align-items:center; gap: 28px;
+  font-size: 13px;
   color: inherit;
   opacity: 0.85;
 }

@@ -1,5 +1,5 @@
-/* Shared navigation, homepage hero, and live market strip */
-const { useState } = React;
+/* Hero, Tickers, Form */
+const { useState, useEffect, useRef } = React;
 
 function Logo() {
   return (
@@ -7,9 +7,9 @@ function Logo() {
       <svg className="logo-mark-img" viewBox="0 0 240 240" fill="none" aria-hidden="true">
         <defs>
           <linearGradient id="fxLogoGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#21bbd7"/>
-            <stop offset="40%" stopColor="#3b58c8"/>
-            <stop offset="70%" stopColor="#8a35c3"/>
+            <stop offset="0%"   stopColor="#21bbd7"/>
+            <stop offset="40%"  stopColor="#3b58c8"/>
+            <stop offset="70%"  stopColor="#8a35c3"/>
             <stop offset="100%" stopColor="#bf1cc1"/>
           </linearGradient>
         </defs>
@@ -27,58 +27,49 @@ const NAV_PAGES = [
   { href: "index.html", label: "Home", key: "home" },
   { href: "about-us.html", label: "About Us", key: "about" },
   { href: "affiliates-ibs.html", label: "Affiliates / IBs", key: "affiliates" },
-  { href: "marketing.html", label: "Marketing Support", key: "marketing" },
+  { href: "marketing.html", label: "Marketing", key: "marketing" },
   { href: "education.html", label: "Education", key: "education" },
-  { href: "tools.html", label: "Tools", key: "tools" },
   { href: "contact-us.html", label: "Contact Us", key: "contact" },
 ];
 
 function Navbar({ active = "home", solidStart = false }) {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
   React.useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [open]);
-
   const close = () => setOpen(false);
-  const mode = solidStart ? "scrolled" : scrolled ? "scrolled" : "over-hero";
-
+  const mode = solidStart ? 'scrolled' : (scrolled ? 'scrolled' : 'over-hero');
   return (
-    <nav className={`nav ${mode} ${open ? "open" : ""}`}>
+    <nav className={`nav ${mode} ${open ? 'open' : ''}`}>
       <div className="container nav-inner">
         <Logo />
         <div className="nav-links">
-          {NAV_PAGES.map((page) => (
+          {NAV_PAGES.map(p => (
             <a
-              key={page.key}
-              href={page.href}
-              className={active === page.key ? "active" : ""}
+              key={p.key}
+              href={p.href}
+              className={active === p.key ? 'active' : ''}
               onClick={close}
-            >
-              {page.label}
-            </a>
+            >{p.label}</a>
           ))}
         </div>
         <div className="nav-cta">
-          <a href="contact-us.html" className="btn btn-ghost">Talk to us</a>
-          <a href="contact-us.html" className="btn btn-primary">Apply now <span className="arrow">→</span></a>
+          <a href="#" className="btn btn-ghost">Log in</a>
+          <a href="contact-us.html" className="btn btn-primary">Sign up <span className="arrow">→</span></a>
         </div>
         <button
           className="nav-burger"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          onClick={() => setOpen((isOpen) => !isOpen)}
+          onClick={() => setOpen(o => !o)}
         >
           <span></span><span></span><span></span>
         </button>
@@ -87,17 +78,57 @@ function Navbar({ active = "home", solidStart = false }) {
   );
 }
 
-function HeroForm() {
-  const [role, setRole] = useState("");
+function Sparkline({ color = "var(--pos)", points }) {
+  const w = 160, h = 38;
+  const max = Math.max(...points), min = Math.min(...points);
+  const range = max - min || 1;
+  const path = points.map((p, i) => {
+    const x = (i / (points.length - 1)) * w;
+    const y = h - ((p - min) / range) * h;
+    return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const area = `${path} L${w},${h} L0,${h} Z`;
+  const id = `sg-${Math.random().toString(36).slice(2,7)}`;
+  return (
+    <svg className="spark" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.4"/>
+          <stop offset="100%" stopColor={color} stopOpacity="0"/>
+        </linearGradient>
+      </defs>
+      <path d={area} fill={`url(#${id})`} />
+      <path d={path} fill="none" stroke={color} strokeWidth="1.4"/>
+    </svg>
+  );
+}
 
+function Ticker({ pair, quote, basePrice, delta, up, flag }) {
+  const sparkUp = [3,4,3.6,5,4.5,6,5.8,7,6.5,8,7.5,8.5];
+  const sparkDown = [8,7.5,8,7,7.2,6.5,6,5.5,5,4.5,4,3.5];
+  return (
+    <div className="ticker">
+      <div className="row">
+        <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+          <div className="flag-badge">{flag}</div>
+          <div className="pair">{pair}<span className="quote">/{quote}</span></div>
+        </div>
+        <div className={`delta${up ? '' : ' neg'}`}>
+          {up ? '▲' : '▼'} {delta}
+        </div>
+      </div>
+      <div className="price"><TickingPrice base={basePrice}/></div>
+      <Sparkline points={up ? sparkUp : sparkDown} color={up ? '#a3ffd6' : '#ffb3cf'}/>
+    </div>
+  );
+}
+
+function HeroForm() {
+  const [role, setRole] = useState('');
   return (
     <div className="form-card">
-      <div className="form-card-bar"></div>
-      <div className="form-card-hd">
-        <span className="form-badge">Partner application</span>
-        <h3>Tell us about your business</h3>
-        <p className="sub">Your regional country manager will be in touch within 24 hours.</p>
-      </div>
+      <h3>Get started today</h3>
+      <p className="sub">Tell us a bit about you — we'll match you with the right deal.</p>
 
       <div className="field">
         <label>Full name</label>
@@ -106,47 +137,44 @@ function HeroForm() {
 
       <div className="form-row">
         <div className="field">
-          <label>Email address</label>
+          <label>Email</label>
           <input type="email" placeholder="you@email.com" autoComplete="email"/>
         </div>
         <div className="field">
-          <label>Phone number</label>
-          <input type="text" placeholder="+971 50 123 4567" autoComplete="tel"/>
-          <small>Include country code</small>
+          <label>Country</label>
+          <select defaultValue="">
+            <option value="" hidden>Select</option>
+            <option>United Arab Emirates</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Singapore</option>
+            <option>Germany</option>
+            <option>India</option>
+          </select>
         </div>
       </div>
 
       <div className="form-row">
         <div className="field">
-          <label>Country</label>
-          <select defaultValue="">
-            <option value="" hidden>Select your country</option>
-            <option>United Arab Emirates</option>
-            <option>United Kingdom</option>
-            <option>United States</option>
-            <option>India</option>
-            <option>Singapore</option>
-            <option>Other</option>
+          <label>Category</label>
+          <select value={role} onChange={e=>setRole(e.target.value)}>
+            <option value="" hidden>Affiliate / IB / Platform</option>
+            <option value="affiliate">Affiliate</option>
+            <option value="ib">Introducing Broker</option>
+            <option value="trader">Trader</option>
+            <option value="platform">Platform</option>
           </select>
         </div>
         <div className="field">
-          <label>I am a...</label>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="" hidden>Choose one</option>
-            <option value="affiliate">Affiliate</option>
-            <option value="ib">Introducing Broker (IB)</option>
-            <option value="platform">Trading Platform or Broker</option>
-          </select>
+          <label>Phone number</label>
+          <input type="text" placeholder="+971 50 123 4567" autoComplete="tel"/>
+          <small>Include country code, +971 ...</small>
         </div>
       </div>
 
       <button type="button" className="submit-btn">
-        Send message
-        <svg className="submit-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
+        Send Message <span>→</span>
       </button>
-      <p className="form-note">No retail trader applications · We respond within 24 hours</p>
     </div>
   );
 }
@@ -181,46 +209,43 @@ function HeroBackdrop() {
         <circle className="hc-pulse-ring" cx="1180" cy="68" r="5" fill="none" stroke="#ffffff" strokeWidth="1.5"/>
       </svg>
 
+      {/* floating fx chips */}
       <div className="fx-chips">
-        <div className="fx-chip c1"><span className="fc-pair">CPA DEALS</span><span className="fc-up">Guaranteed better terms</span></div>
-        <div className="fx-chip c2"><span className="fc-pair">IB GROWTH</span><span className="fc-up">Marketing support included</span></div>
-        <div className="fx-chip c3"><span className="fc-pair">PLATFORMS</span><span className="fc-dn">Vetted partner matching</span></div>
+        <div className="fx-chip c1"><span className="fc-pair">EUR/USD</span><span className="fc-up">+0.42%</span></div>
+        <div className="fx-chip c2"><span className="fc-pair">XAU/USD</span><span className="fc-up">+1.07%</span></div>
+        <div className="fx-chip c3"><span className="fc-pair">GBP/JPY</span><span className="fc-dn">−0.18%</span></div>
       </div>
     </div>
   );
 }
 
 function TickingPrice({ base, drift = 0.0006 }) {
-  const [value, setValue] = React.useState(base);
+  const [v, setV] = React.useState(base);
   const [up, setUp] = React.useState(true);
-
   React.useEffect(() => {
-    let current = base;
+    let cur = base;
     const id = setInterval(() => {
-      const delta = (Math.random() - 0.5) * 2 * drift * base;
-      current = Math.max(base * 0.98, Math.min(base * 1.02, current + delta));
-      setUp(delta >= 0);
-      setValue(current);
+      const d = (Math.random()-0.5) * 2 * drift * base;
+      cur = Math.max(base*0.98, Math.min(base*1.02, cur + d));
+      setUp(d >= 0);
+      setV(cur);
     }, 1400);
     return () => clearInterval(id);
   }, [base, drift]);
-
   const decimals = base < 10 ? 5 : 2;
-  return (
-    <span className={`tk-price ${up ? "up" : "dn"}`}>
-      {value.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
-    </span>
-  );
+  return <span className={`tk-price ${up?'up':'dn'}`}>{v.toLocaleString(undefined,{minimumFractionDigits:decimals,maximumFractionDigits:decimals})}</span>;
 }
 
 function MarketStrip() {
   const items = [
-    { p: "GBP/USD", base: 1.27413, d: "+0.42%", up: true },
-    { p: "EUR/USD", base: 1.08530, d: "+0.18%", up: true },
-    { p: "XAU/USD", base: 2357.20, d: "+1.07%", up: true },
+    { p: "GBP/USD", base: 0.73903, d: "+0.42%", up: true },
+    { p: "EUR/USD", base: 0.85530, d: "+0.18%", up: true },
+    { p: "XAU/USD", base: 4557.20, d: "+1.07%", up: true },
+    { p: "USD/JPY", base: 154.82, d: "−0.21%", up: false },
+    { p: "BTC/USD", base: 96420.00, d: "+2.14%", up: true },
+    { p: "USD/CHF", base: 0.88410, d: "−0.06%", up: false },
   ];
   const all = [...items, ...items];
-
   return (
     <div className="market-strip">
       <div className="ms-track">
@@ -228,7 +253,7 @@ function MarketStrip() {
           <div className="ms-item" key={i}>
             <span className="ms-pair">{it.p}</span>
             <span className="ms-price"><TickingPrice base={it.base}/></span>
-            <span className={`ms-delta ${it.up ? "up" : "dn"}`}>{it.up ? "▲" : "▼"} {it.d}</span>
+            <span className={`ms-delta ${it.up?'up':'dn'}`}>{it.up?'▲':'▼'} {it.d}</span>
           </div>
         ))}
       </div>
@@ -243,19 +268,19 @@ function Hero() {
       <div className="container hero-grid">
         <div>
           <span className="eyebrow">
-            <span className="dot"></span> The FX Industry&apos;s Growth Partner
+            <span className="dot"></span> Live · FX Partnerships
           </span>
           <h1>
-            Unlock Better Deals.
-            <br/>
-            Grow Your <span className="accent">FX Business.</span>
+            Unlocking <span className="accent">growth</span><br/>
+            for FX educators.
           </h1>
           <p className="hero-sub">
-            FX Unlocked connects FX educators, content creators, and introducing brokers with the world&apos;s leading trading platforms on off-market CPA and rebate deals, backed by free marketing support, educational content, and a team with over a decade of FX experience.
+            Market-leading CPA deals and 10× growth with world-class marketing
+            support — built for creators, IBs and trading platforms.
           </p>
           <div className="hero-cta-row">
-            <a href="contact-us.html" className="btn btn-cyan">Apply as an Affiliate or IB <span className="arrow">→</span></a>
-            <a href="contact-us.html" className="btn btn-ghost">Are you a trading platform?</a>
+            <a href="#" className="btn btn-cyan">Become a partner <span className="arrow">→</span></a>
+            <a href="#aboutUs" className="btn btn-ghost">How it works</a>
           </div>
         </div>
         <HeroForm />
