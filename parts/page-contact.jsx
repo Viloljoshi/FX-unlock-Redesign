@@ -8,10 +8,10 @@ function ContactHero() {
         <div className="mesh mesh-b"></div>
       </div>
       <div className="container">
-        <span className="eyebrow"><span className="dot"></span>Contact Us</span>
-        <h1>Let's <span className="accent">get in touch.</span></h1>
+        <span className="eyebrow"><span className="dot"></span>Get In Touch</span>
+        <h1>Get In <span className="accent">Touch</span></h1>
         <p className="lead">
-          We'd love to hear from you. Whether you're an Affiliate, IB or Trading Platform — get in touch and one of our team will respond shortly.
+          Affiliate, IB, or trading platform, tell us a bit about your business and your regional country manager will be in touch within 24 hours.
         </p>
       </div>
     </section>
@@ -20,77 +20,98 @@ function ContactHero() {
 
 function ContactBlock() {
   return (
-    <section style={{ background: 'var(--bg-soft)', padding: '0 0 96px' }}>
+    <section style={{ background: "var(--bg-soft)", padding: "0 0 96px" }}>
       <div className="container">
-        <div className="contact-shell" style={{ borderRadius: 24, overflow:'hidden', boxShadow:'0 32px 64px -32px rgba(20,30,80,0.25)' }}>
+        <div className="contact-shell" style={{ borderRadius: 24, overflow: "hidden", boxShadow: "0 32px 64px -32px rgba(20,30,80,0.25)" }}>
           <div className="contact-info">
             <div className="ci-block">
-              <h4>📍 Address</h4>
+              <h4>Address</h4>
               <p>Floor 38, Media One Tower, Dubai Marina, UAE</p>
             </div>
             <div className="ci-block">
-              <h4>✉️ Email</h4>
-              <p>hello@fx-unlocked.com<br/><span style={{opacity:0.75, fontSize:14, fontWeight:400}}>for public inquiries</span></p>
+              <h4>Phone</h4>
+              <p>+971 58 578 4483</p>
             </div>
             <div className="ci-block">
-              <h4>📞 Call</h4>
-              <p>+971 58 578 4483<br/><span style={{opacity:0.75, fontSize:14, fontWeight:400}}>Mon – Fri, 9am – 5pm</span></p>
+              <h4>Email</h4>
+              <p>hello@fx-unlocked.com</p>
             </div>
-            <div className="ci-map">
-              <iframe
-                title="FX Unlocked — Media One Tower, Dubai Marina"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.484!2d55.137459!3d25.080126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b5a23c48b3b%3A0x6f0b08b88d25fb8a!2sMedia%20One%20Tower%2C%20Dubai%20Marina!5e0!3m2!1sen!2sae!4v1683000000000!5m2!1sen!2sae"
-                loading="lazy"
-                allowFullScreen=""
-                referrerPolicy="no-referrer-when-downgrade"
-                style={{ border: 0, colorScheme: 'normal' }}
-              ></iframe>
+            <div className="ci-block">
+              <h4>WhatsApp</h4>
+              <p><a href="https://wa.me/971585784483" className="contact-inline-link">+971 58 578 4483 (tap to message directly)</a></p>
+            </div>
+            <div className="ci-block">
+              <h4>Social</h4>
+              <div className="social-inline-list">
+                <a href="https://www.instagram.com/fx.unlocked/">Instagram: @fx.unlocked</a>
+                <a href="https://www.tiktok.com/@fx.unlocked">TikTok: @fx.unlocked</a>
+                <a href="https://www.linkedin.com/">LinkedIn: FX Unlocked</a>
+              </div>
             </div>
           </div>
           <div className="contact-form">
             <h2>Contact Us</h2>
-            <p className="sub">Tell us a bit about yourself and we'll be in touch.</p>
+            <p className="sub">Tell us a bit about your business and we&apos;ll be in touch.</p>
             <form>
-              <div className="row-2">
-                <div className="field">
-                  <label>First Name</label>
-                  <input type="text" placeholder="Your Name"/>
-                </div>
-                <div className="field">
-                  <label>Last Name</label>
-                  <input type="text" placeholder="Your Name"/>
-                </div>
+              <div className="field">
+                <label>Full name</label>
+                <input type="text" placeholder="Your name"/>
               </div>
               <div className="row-2">
                 <div className="field">
-                  <label>Email</label>
-                  <input type="email" placeholder="Your Email"/>
+                  <label>Email address</label>
+                  <input type="email" placeholder="you@email.com"/>
                 </div>
                 <div className="field">
-                  <label>Phone Number</label>
+                  <label>Phone number including country code</label>
                   <input type="tel" placeholder="+971 50 123 4567"/>
                 </div>
               </div>
+              <div className="row-2">
+                <div className="field">
+                  <label>Country</label>
+                  <select defaultValue="">
+                    <option value="" hidden>Select your country</option>
+                    <option>United Arab Emirates</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                    <option>India</option>
+                    <option>Singapore</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>I am a...</label>
+                  <select defaultValue="">
+                    <option value="" hidden>Select one</option>
+                    <option>Affiliate</option>
+                    <option>Introducing Broker (IB)</option>
+                    <option>Trading Platform or Broker</option>
+                  </select>
+                </div>
+              </div>
               <div className="field">
-                <label>Category</label>
-                <select>
-                  <option>Affiliate / IB / Platform</option>
-                  <option>Affiliate</option>
-                  <option>IB</option>
-                  <option>Platform</option>
+                <label>Tell us about your business</label>
+                <textarea placeholder="Audience size, current deal, what you're looking for"></textarea>
+              </div>
+              <div className="field">
+                <label>How did you hear about us?</label>
+                <select defaultValue="">
+                  <option value="" hidden>Select one</option>
+                  <option>Social media</option>
+                  <option>Google</option>
+                  <option>Referral</option>
+                  <option>Event</option>
+                  <option>Other</option>
                 </select>
               </div>
-              <div className="field">
-                <label>Message</label>
-                <textarea placeholder="Your Message"></textarea>
-              </div>
               <button type="button" className="btn-submit">
-                Send my message
+                Send message
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: 10 }}>
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <p style={{ textAlign:'center', fontSize:12, color:'rgba(255,255,255,0.45)', margin:'14px 0 0', fontFamily:'var(--mono)', letterSpacing:'0.06em' }}>We respond within 24 h · Your data stays private</p>
+              <p style={{ textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.45)", margin: "14px 0 0", fontFamily: "var(--mono)", letterSpacing: "0.06em" }}>We respond within 24 h · Your data stays private</p>
             </form>
           </div>
         </div>

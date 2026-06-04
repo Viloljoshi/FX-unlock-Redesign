@@ -1,4 +1,4 @@
-/* About Us — single-page layout reusing v4 design tokens */
+/* About Us page */
 
 function AboutHero() {
   return (
@@ -10,14 +10,10 @@ function AboutHero() {
       </div>
       <div className="container">
         <span className="eyebrow"><span className="dot"></span>About FX Unlocked</span>
-        <h1>About <span className="accent">FX Unlocked.</span></h1>
+        <h1>About <span className="accent">FX Unlocked</span></h1>
         <p className="lead">
-          Powerful partnerships between FX Educators and Leading FX trading platforms — driving mutual growth and success.
+          A decade of FX expertise. A global network. One mission: better deals, better growth, for everyone in the FX ecosystem.
         </p>
-        <div className="cta-row">
-          <a href="affiliates-ibs.html" className="btn-grad">Learn More <span className="arrow">→</span></a>
-          <a href="contact-us.html" className="btn-outline">Talk to us</a>
-        </div>
       </div>
     </section>
   );
@@ -27,10 +23,16 @@ function AboutMission() {
   return (
     <section className="section">
       <div className="container">
-        <span className="section-eyebrow">Our Mission</span>
-        <h2>About <span className="accent">FX Unlocked.</span></h2>
+        <span className="section-eyebrow">Our Story</span>
+        <h2>Built to fix the biggest gaps in the <span className="accent">market.</span></h2>
         <p className="lede">
-          At FX Unlocked, we understand the dynamic world of Foreign Exchange (FX) and the immense potential it holds. Our mission is to create powerful partnerships between FX Educators and Leading FX trading platforms, driving mutual growth and success. Whether you're an existing Affiliate looking for a more attractive deal (CPA/Rebates), or you're an aspiring Trader looking for a comprehensive Trading course, FX Unlocked has you covered.
+          FX Unlocked was founded by professionals who spent years working inside the foreign exchange industry with brokers, affiliate networks, and trading platforms across multiple continents. We saw the same problems everywhere we looked.
+        </p>
+        <p className="lede">
+          FX educators with large, engaged audiences were being offered mediocre CPA rates because they lacked the network leverage to negotiate better. Experienced IBs with strong client books were locked into rebate structures well below what the market would bear. And brokers looking to expand into new regions couldn&apos;t reliably source quality, compliant affiliate partners.
+        </p>
+        <p className="lede" style={{ marginBottom: 0 }}>
+          FX Unlocked exists to fix all three of those problems at once. We sit at the centre of the FX ecosystem, connecting the right affiliates and IBs to the right broker partners on terms that reflect the true value of the traffic and client relationships being brought to the table. We&apos;re headquartered on the 38th floor of Media One Tower in Dubai Marina, with team members across five countries and active broker relationships on every major trading continent.
         </p>
       </div>
     </section>
@@ -38,20 +40,38 @@ function AboutMission() {
 }
 
 function AboutMaximize() {
+  const values = [
+    {
+      title: "Better Deals, Always",
+      text: "We guarantee to beat your current CPA or rebate deal. If we can’t, we’ll tell you why. Our entire model is built on delivering demonstrably better terms for every partner we work with.",
+    },
+    {
+      title: "Long-Term Partnership",
+      text: "We don’t place you with a broker and disappear. We stay involved, reviewing your performance, supporting your growth, and making sure the match keeps working for both sides.",
+    },
+    {
+      title: "Transparency",
+      text: "You’ll always know what deal you’re on, why we’ve recommended a particular broker, and exactly what our role in the relationship is. No hidden arrangements, no vague promises.",
+    },
+    {
+      title: "Global Reach, Local Knowledge",
+      text: "FX is a local business. Regulations differ. Audiences differ. Client expectations differ. That’s why we have country managers on the ground, not a centralised support desk.",
+    },
+  ];
+
   return (
     <section className="section dark">
       <div className="container">
-        <div className="two-col">
-          <div>
-            <span className="pill">For Educators</span>
-            <h2>Looking to <span className="accent">maximize</span> your revenue?</h2>
-          </div>
-          <div>
-            <p className="lede">
-              Are you an FX educator with a growing audience but struggling to monetize your traffic effectively? FX Unlocked is here to help. We specialize in connecting you with top-tier Foreign Exchange Trading Platforms that are eager to partner/sponsor with influential creators.
-            </p>
-            <a href="marketing.html" className="btn-grad">Learn More <span className="arrow">→</span></a>
-          </div>
+        <span className="section-eyebrow">Mission &amp; Values</span>
+        <h2>What We <span className="accent">Stand For</span></h2>
+        <div className="feature-grid" style={{ marginTop: 32 }}>
+          {values.map((value, i) => (
+            <div key={i} className="feature-card">
+              <div className="feature-num">{String(i + 1).padStart(2, "0")}</div>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -62,17 +82,11 @@ function AboutTrade() {
   return (
     <section className="section">
       <div className="container">
-        <div className="two-col">
-          <div>
-            <span className="pill">For Traders</span>
-            <h2>Trade with <span className="accent">confidence.</span></h2>
-          </div>
-          <div>
-            <p className="lede">
-              At FX Unlocked, we empower aspiring traders with the knowledge and tools they need to succeed in the dynamic world of Forex trading. Our comprehensive trading courses are designed for beginners and seasoned traders alike, offering step-by-step guidance, market insights, and proven strategies. Whether you're looking to build a new skill or enhance your trading expertise, FX Unlocked has everything you need to start trading with confidence.
-            </p>
-            <a href="education.html" className="btn-grad">Explore All Products <span className="arrow">→</span></a>
-          </div>
+        <span className="section-eyebrow">The Team</span>
+        <h2>Meet the <span className="accent">Team</span></h2>
+        <div className="feature-card team-placeholder-card">
+          <h3>Team profiles to be added</h3>
+          <p>Add real photos, names, roles, and short bios once confirmed. Suggested format: headshot, name, title, and a short two-sentence bio for each team member.</p>
         </div>
       </div>
     </section>
@@ -83,32 +97,12 @@ function AboutNumbers() {
   return (
     <section className="section dark">
       <div className="container">
-        <span className="section-eyebrow">By the Numbers</span>
-        <h2>FX Unlocked <span className="accent">by Numbers.</span></h2>
-        <p className="lede">
-          At FX Unlocked, our vision is bold: to connect and empower educators, partners and traders on every continent and grow our network to 1000+ partners by mid-2026. With over a decade of expertise in the Foreign Exchange industry, we are well on our way to achieving this goal.
-        </p>
-        <div className="stats-strip" style={{ marginTop: 36 }}>
-          <div className="stat-item">
-            <div className="stat-value">200+</div>
-            <div className="stat-label">Affiliates / IBs</div>
-            <p className="stat-desc">Collaborating with a thriving network of professionals dedicated to success.</p>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">12</div>
-            <div className="stat-label">Trading Platforms</div>
-            <p className="stat-desc">Providing diverse options to meet the needs of affiliates and traders worldwide.</p>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">5</div>
-            <div className="stat-label">Countries</div>
-            <p className="stat-desc">A truly global team driving innovation and growth across borders.</p>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">10+</div>
-            <div className="stat-label">Years of Expertise</div>
-            <p className="stat-desc">Building trust, delivering value, and unlocking growth since day one.</p>
-          </div>
+        <span className="section-eyebrow">Stats</span>
+        <div className="wide-stat-callout">
+          <span>200+ partners</span>
+          <span>12 trading platforms</span>
+          <span>Staff in 5 countries</span>
+          <span>10+ years of industry experience</span>
         </div>
       </div>
     </section>
@@ -120,13 +114,12 @@ function AboutCTA() {
     <section className="section tight">
       <div className="container">
         <div className="wide-cta">
-          <h2>Ready to <span style={{fontStyle:'italic'}}>get started?</span></h2>
+          <h2>Want to <span style={{ fontStyle: "italic" }}>Work With Us?</span></h2>
           <p>
-            We're not just growing; we're revolutionizing the affiliate/IB experience in the FX World. Join us on this journey as we continue to unlock possibilities and break boundaries.
+            Whether you&apos;re an educator, an IB, or a trading platform looking for quality partners, get in touch and we&apos;ll tell you what we can do.
           </p>
           <div className="cta-row">
-            <a href="contact-us.html" className="btn-grad">Talk to our team <span className="arrow">→</span></a>
-            <a href="affiliates-ibs.html" className="btn-outline">Become a partner</a>
+            <a href="contact-us.html" className="btn-grad">Contact us <span className="arrow">→</span></a>
           </div>
         </div>
       </div>

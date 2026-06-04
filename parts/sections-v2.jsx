@@ -1,146 +1,131 @@
-/* v2 — minimalist data cards instead of mosaics */
+/* Homepage content sections aligned to the June 2026 brief */
 
-function DataCardV2({ pair, price, delta, up = true, range, vol, high }) {
-  const sparkUp = [4,5,4.5,6,5.8,7,6.5,8.5,7.5,9.5,8.5,10.5,9.5,11.5,10.5,12.5];
-  const sparkDown = [11,10.5,11,9.5,10,8.5,9,7.5,8,7,6.5,6,5.5,5,4.5,4];
-  const points = up ? sparkUp : sparkDown;
-  const w = 400, h = 120;
-  const max = Math.max(...points), min = Math.min(...points);
-  const r = max - min || 1;
-  const path = points.map((p, i) => {
-    const x = (i / (points.length - 1)) * w;
-    const y = h - ((p - min) / r) * (h - 8) - 4;
-    return `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(' ');
-  const id = `dcg-${pair.replace(/[^a-z0-9]/gi,'')}`;
+function AboutV2() {
   return (
-    <div className="datacard">
-      <div className="dc-head">
-        <span className="dc-pair">{pair} · 1D</span>
-        <span className="dc-live">Live</span>
-      </div>
-      <div className="dc-body">
-        <div className="dc-bigprice">{price}</div>
-        <div className="dc-meta">
-          <span className={`delta${up ? '' : ' neg'}`}>{up ? '↗' : '↘'} {delta}</span>
-          <span>·</span>
-          <span>24h</span>
-        </div>
-        <div className="dc-chart">
-          <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
-            <defs>
-              <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--cyan)" stopOpacity="0.18"/>
-                <stop offset="100%" stopColor="var(--cyan)" stopOpacity="0"/>
-              </linearGradient>
-            </defs>
-            <path d={`${path} L${w},${h} L0,${h} Z`} fill={`url(#${id})`}/>
-            <path d={path} fill="none" stroke="var(--cyan)" strokeWidth="1.5"/>
-          </svg>
-        </div>
-      </div>
-      <div className="dc-foot">
-        <div>Range<b>{range}</b></div>
-        <div>Volume<b>{vol}</b></div>
-        <div>High<b>{high}</b></div>
-      </div>
-    </div>
-  );
-}
-
-function FeatureBlockV2({ num, title, lede, body, bullets, cardProps, reverse, sectionId, ctaLabel = "Learn more" }) {
-  return (
-    <section className="section" id={sectionId}>
+    <section className="section">
       <div className="container">
-        <div className="section-head">
-          <div>
-            <p className="num">{num}</p>
-            <h2 dangerouslySetInnerHTML={{ __html: title }} />
+        <span className="section-eyebrow">Who We Work With</span>
+        <h2>Who We <span className="accent">Work With</span></h2>
+        <div className="feature-grid" style={{ marginTop: 32 }}>
+          <div className="feature-card">
+            <div className="feature-num">01</div>
+            <h3>FX Educators &amp; Content Creators</h3>
+            <p>You&apos;ve built an audience around trading content. We&apos;ll connect you to the right broker partners, secure a deal that reflects the quality of your traffic, and support your growth with marketing help that actually moves the needle.</p>
+            <a href="contact-us.html" className="feature-link">Apply as an Affiliate <span className="arrow">→</span></a>
           </div>
-          <p className="lede">{lede}</p>
-        </div>
-        <div className={`about-grid${reverse ? ' reverse' : ''}`}>
-          {reverse && <DataCardV2 {...cardProps}/>}
-          <div className="about-copy">
-            <p>{body}</p>
-            <ul className="about-bullets">
-              {bullets.map((b, i) => (
-                <li key={i}>
-                  <span className="b-num">{String(i+1).padStart(2,'0')}</span>
-                  <span className="b-body">
-                    <strong>{b.title}</strong>
-                    {b.text}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <a href="#" className="btn" style={{ marginTop: 32 }}>
-              {ctaLabel} <span className="arrow">→</span>
-            </a>
+          <div className="feature-card">
+            <div className="feature-num">02</div>
+            <h3>Introducing Brokers (IBs)</h3>
+            <p>You have an established client base of active traders. We&apos;ll place you on the best rebate structure in the market for your volume and give you the tools to scale your book further.</p>
+            <a href="contact-us.html" className="feature-link">Apply as an IB <span className="arrow">→</span></a>
           </div>
-          {!reverse && <DataCardV2 {...cardProps}/>}
+          <div className="feature-card">
+            <div className="feature-num">03</div>
+            <h3>Trading Platforms &amp; Brokers</h3>
+            <p>You need quality client acquisition from vetted, high-performing affiliates and IBs in specific markets. We&apos;ll match you with the right partners and manage the relationship end to end.</p>
+            <a href="contact-us.html" className="feature-link">Partner with us <span className="arrow">→</span></a>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function AboutV2() {
-  return (
-    <FeatureBlockV2
-      sectionId="aboutUs"
-      num="01 / About"
-      title='About <em>FX Unlocked</em>.'
-      lede="We connect FX educators and creators with the world's leading trading platforms — driving mutual growth, every quarter."
-      body="At FX Unlocked, we understand the dynamic world of Foreign Exchange (FX) and the immense potential it holds. Our mission is to create powerful partnerships between FX Educators and leading FX trading platforms, driving mutual growth and success. Whether you're an existing affiliate looking for a more attractive deal (CPA / Rebates), or you're an aspiring trader looking for a comprehensive trading course, FX Unlocked has you covered."
-      bullets={[
-        { title: "For affiliates & IBs", text: "Better CPAs, faster payouts, and dedicated account management with global brokers." },
-        { title: "For trading platforms", text: "Access a vetted network of high-performing educators with engaged FX audiences." },
-        { title: "For traders", text: "Comprehensive courses and tooling to start trading with discipline and confidence." },
-      ]}
-      cardProps={{ pair: "EUR/USD", price: "1.0843", delta: "+0.42%", up: true, range: "1.078 – 1.087", vol: "$112.4B", high: "1.0871" }}
-    />
-  );
-}
-
 function MaximizeRevenueV2() {
   return (
-    <FeatureBlockV2
-      sectionId="MaximizeRevenue"
-      reverse
-      num="02 / Affiliates & IBs"
-      title='<em>Maximize</em> your revenue.'
-      lede="Stop leaving CPA on the table. We negotiate market-leading deals on your behalf and bring the marketing firepower."
-      body="Are you an FX educator with a growing audience but struggling to monetize your traffic effectively? FX Unlocked is here to help. We specialize in connecting you with top-tier Foreign Exchange Trading Platforms that are eager to partner and sponsor influential creators."
-      bullets={[
-        { title: "Market-leading CPA deals", text: "Negotiated rates 1.5–3× higher than what affiliates source independently." },
-        { title: "Marketing support", text: "Branding, creative, paid media playbooks and conversion-rate optimisation." },
-        { title: "Single dashboard", text: "Track clicks, conversions and rebates across all your broker partnerships in one place." },
-      ]}
-      cardProps={{ pair: "REVENUE · MTD", price: "$48,210", delta: "+312%", up: true, range: "$11k – $48k", vol: "1,240 conv.", high: "Top 5%" }}
-    />
+    <section className="section alt">
+      <div className="container">
+        <div className="two-col" style={{ alignItems: "center" }}>
+          <div>
+            <span className="section-eyebrow">About FX Unlocked</span>
+            <h2>Built by people who know the <span className="accent">FX industry.</span></h2>
+          </div>
+          <div>
+            <p className="lede" style={{ marginBottom: 20 }}>
+              FX Unlocked was built by people who&apos;ve spent their careers inside the foreign exchange industry. We&apos;ve seen talented educators undersell their audiences, IBs stuck on poor deals, and brokers struggle to find quality affiliate partners in the markets they want to reach.
+            </p>
+            <p className="lede" style={{ marginBottom: 28 }}>
+              So we built the solution. We sit in the middle, connecting educators and IBs to regulated trading platforms on off-market terms, with the marketing support and educational tools to help our partners grow their businesses alongside their broker relationships. Based in Dubai. Operating globally. Over a decade of FX expertise behind every deal we negotiate.
+            </p>
+            <a href="about-us.html" className="btn-outline-dark">Our full story</a>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 function TradeWithConfidenceV2() {
   return (
-    <FeatureBlockV2
-      sectionId="TradeWithConfidence"
-      num="03 / Education"
-      title='Trade with <em>confidence</em>.'
-      lede="Comprehensive FX courses for every stage — from your first pip to systematic strategy."
-      body="At FX Unlocked, we empower aspiring traders with the knowledge and tools they need to succeed in the dynamic world of Forex trading. Our comprehensive trading courses are designed for beginners and seasoned traders alike, offering step-by-step guidance, market insights and proven strategies. Whether you're looking to build a new skill or enhance your trading expertise, FX Unlocked has everything you need."
-      bullets={[
-        { title: "Foundations", text: "12 modules on price action, risk management and trading psychology." },
-        { title: "Live mentorship", text: "Weekly market breakdowns and 1-on-1 sessions with senior traders." },
-        { title: "Verified strategies", text: "Backtested setups, journals and accountability cohorts that actually compound." },
-      ]}
-      cardProps={{ pair: "XAU/USD", price: "4,557.20", delta: "+1.07%", up: true, range: "4,508 – 4,562", vol: "$84.2B", high: "4,562" }}
-      ctaLabel="Explore all products"
-    />
+    <section className="section dark">
+      <div className="container">
+        <span className="section-eyebrow">How It Works</span>
+        <h2>How It <span className="accent">Works</span></h2>
+        <div className="step-list" style={{ marginTop: 32 }}>
+          <div className="step">
+            <div className="step-num">1</div>
+            <div>
+              <h3>Apply &amp; Speak to Us</h3>
+              <p>Fill in our short form. We&apos;ll arrange a call with your regional country manager within 24 hours to understand your audience, volume, and current deal.</p>
+            </div>
+          </div>
+          <div className="step">
+            <div className="step-num">2</div>
+            <div>
+              <h3>Get Matched &amp; Onboarded</h3>
+              <p>We match you with the right broker partner for your geography and traffic type, negotiate your deal, and handle onboarding from start to finish.</p>
+            </div>
+          </div>
+          <div className="step">
+            <div className="step-num">3</div>
+            <div>
+              <h3>Start Earning. Keep Growing.</h3>
+              <p>Go live on your best-ever CPA or rebate structure. We stay with you through regular reviews, marketing support, and access to our full product suite.</p>
+            </div>
+          </div>
+        </div>
+        <div className="cta-row" style={{ marginTop: 32 }}>
+          <a href="contact-us.html" className="btn-grad">Get started <span className="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PartnerBenefits() {
+  return (
+    <section className="section">
+      <div className="container">
+        <span className="section-eyebrow">What Partners Get</span>
+        <h2>Everything You Need to <span className="accent">Grow</span></h2>
+        <div className="feature-grid" style={{ marginTop: 32 }}>
+          <div className="feature-card">
+            <h3>Off-Market Broker Deals</h3>
+            <p>We guarantee to beat your current CPA or rebate arrangement. Our network volume and broker relationships give us leverage you can&apos;t access alone.</p>
+          </div>
+          <div className="feature-card">
+            <h3>Free Dedicated Marketing Manager</h3>
+            <p>Every active partner gets an in-house marketing manager at no cost. Social strategy, content planning, brand building, and campaign support are included.</p>
+          </div>
+          <div className="feature-card">
+            <h3>Free Educational Content for Your Audience</h3>
+            <p>Give your community access to professional trading courses free of charge to you. Use them as a lead magnet, member benefit, or premium upsell.</p>
+          </div>
+          <div className="feature-card">
+            <h3>Full FX Product Portfolio</h3>
+            <p>Beyond broker referrals, you&apos;ll have access to AI algorithmic trading tools, webinar series, and structured education ready to offer your audience.</p>
+          </div>
+          <div className="feature-card">
+            <h3>Bi-Monthly Reviews &amp; Growth Audits</h3>
+            <p>A fortnightly check-in call and a full half-yearly business audit covering your content, traffic, conversions, and revenue.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 window.AboutV2 = AboutV2;
 window.MaximizeRevenueV2 = MaximizeRevenueV2;
 window.TradeWithConfidenceV2 = TradeWithConfidenceV2;
+window.PartnerBenefits = PartnerBenefits;
