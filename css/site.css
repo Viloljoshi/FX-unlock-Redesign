@@ -137,7 +137,12 @@ h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; margin: 0; lette
 .grad-ink {
   background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-em.accent { font-style: italic; font-weight: 400; }
+em.accent {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 400;
+  padding-bottom: 0.08em;
+}
 .lead { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; color: var(--ink-mute); }
 .body { font-size: 16.5px; line-height: 1.65; color: var(--ink-mute); }
 .small { font-size: 13.5px; color: var(--ink-mute); }
