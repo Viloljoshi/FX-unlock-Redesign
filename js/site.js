@@ -100,16 +100,48 @@
     document.body.appendChild(f);
   }
 
+  /* ---- Scroll reveal (works for static + dynamically-injected nodes) ---- */
   function scrollReveal() {
-    const els = document.querySelectorAll("[data-reveal]");
-    if (!("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("in")); return; }
+    // Fallback: no IntersectionObserver → reveal everything immediately.
+    if (!("IntersectionObserver" in window)) {
+      const showAll = () => document.querySelectorAll("[data-reveal]").forEach((e) => e.classList.add("in"));
+      showAll();
+      // Re-run for content injected after boot.
+      new MutationObserver(showAll).observe(document.body, { childList: true, subtree: true });
+      window.__fxReveal = { observe: (el) => el && el.classList.add("in") };
+      return;
+    }
+
     const io = new IntersectionObserver(
       (ents) => ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
-    els.forEach((e) => io.observe(e));
-    // safety: never leave content hidden (covers no-IO support, capture harnesses, etc.)
-    setTimeout(() => els.forEach((e) => e.classList.add("in")), 1600);
+
+    const observe = (el) => {
+      if (!el || el.classList.contains("in") || el.__fxObserved) return;
+      el.__fxObserved = true;
+      io.observe(el);
+    };
+
+    document.querySelectorAll("[data-reveal]").forEach(observe);
+
+    // Auto-observe any [data-reveal] added later (page-level injection scripts, FAQ, grids, etc.)
+    const mo = new MutationObserver((muts) => {
+      muts.forEach((m) => m.addedNodes.forEach((node) => {
+        if (node.nodeType !== 1) return;
+        if (node.matches && node.matches("[data-reveal]")) observe(node);
+        if (node.querySelectorAll) node.querySelectorAll("[data-reveal]").forEach(observe);
+      }));
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Safety: nothing should ever stay invisible. Re-query at fire time so
+    // dynamically-injected nodes get the .in class too (covers reduced-motion
+    // fallbacks, capture harnesses, and pages that inject content very late).
+    setTimeout(() => document.querySelectorAll("[data-reveal]:not(.in)").forEach((e) => e.classList.add("in")), 2200);
+
+    // Expose for page scripts that want to opt in explicitly.
+    window.__fxReveal = { observe };
   }
 
   /* ---- Live ticker (hero) ---- */
