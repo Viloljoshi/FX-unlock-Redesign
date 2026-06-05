@@ -108,10 +108,41 @@ body:has(.hero) > .stage-orb { display: none; }
   transform: none !important;
   pointer-events: none;
 }
-/* halo + mesh blobs no longer needed — the video is the stage now */
+/* outer halo + inner halo aren't needed at viewport edge */
 .hero-canvas-wrap::before,
-.hero-halo,
-.hero-viz .mesh { display: none !important; }
+.hero-halo { display: none !important; }
+
+/* Bring back the mesh blob backdrop ON TOP of the video for perpetual
+   ambient motion (per design-taste-frontend §4 "Perpetual Micro-
+   Interactions"). Low opacity + screen blend = subtle cyan/magenta
+   breathing that adds color motion on top of the tinted video.
+   z-index 3 sits ABOVE the tint (z=2) so the blobs are actually
+   visible — screen blend means they only brighten, never darken. */
+.hero-viz .mesh {
+  display: block !important;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  mix-blend-mode: screen;
+  will-change: transform;
+  z-index: 3;
+  pointer-events: none;
+}
+.hero-viz .mesh-a {
+  width: 55%; height: 55%; top: -10%; left: -6%; opacity: 0.30;
+  background: radial-gradient(circle, #2ad0ee 0%, transparent 65%);
+  animation: meshDrift 24s ease-in-out infinite;
+}
+.hero-viz .mesh-b {
+  width: 50%; height: 50%; top: 20%; right: -10%; opacity: 0.26;
+  background: radial-gradient(circle, #ff5acb 0%, transparent 65%);
+  animation: meshDrift 28s ease-in-out infinite reverse;
+}
+.hero-viz .mesh-c {
+  width: 42%; height: 42%; bottom: -8%; left: 30%; opacity: 0.20;
+  background: radial-gradient(circle, #ffd6f5 0%, transparent 65%);
+  animation: meshDrift 32s ease-in-out infinite;
+}
 
 .hero-viz {
   position: absolute; inset: 0;
@@ -136,41 +167,39 @@ body:has(.hero) > .stage-orb { display: none; }
 }
 @keyframes heroVideoFadeIn { to { opacity: 1; } }
 
-/* HEAVY brand-tinted veil so text is rock-solid legible against any video
-   frame. Stacked layers:
-     1. left-anchored linear darkness so the headline stays high-contrast
-        even when the right side of the video is bright
-     2. uniform dark base (80% navy) for global text safety
-     3. soft brand radials so the veil reads on-brand, not generic black
-*/
+/* LIGHTER brand-tinted veil — heavier where the headline lives on the
+   left, fading toward translucent on the right so the video actually
+   reads through. The horizontal gradient is what saves text contrast
+   while letting the motion graphic breathe on the bare side. */
 .hero-tint {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background:
     linear-gradient(95deg,
-      rgba(6,8,24,0.88) 0%,
-      rgba(8,10,28,0.78) 35%,
-      rgba(8,10,28,0.58) 75%,
-      rgba(8,10,28,0.55) 100%),
+      rgba(6,8,24,0.70) 0%,
+      rgba(8,10,28,0.55) 30%,
+      rgba(8,10,28,0.28) 65%,
+      rgba(8,10,28,0.18) 100%),
     linear-gradient(180deg,
-      rgba(8,10,28,0.30) 0%,
-      rgba(8,10,28,0.18) 50%,
-      rgba(8,10,28,0.35) 100%),
-    radial-gradient(ellipse at 30% 40%, rgba(33,187,215,0.20), transparent 60%),
-    radial-gradient(ellipse at 80% 70%, rgba(191,28,193,0.18), transparent 65%);
+      rgba(8,10,28,0.18) 0%,
+      transparent 35%,
+      transparent 70%,
+      rgba(8,10,28,0.30) 100%),
+    radial-gradient(ellipse at 30% 40%, rgba(33,187,215,0.16), transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(191,28,193,0.14), transparent 65%);
   mix-blend-mode: normal;
 }
 @media (max-width: 1000px){
-  /* on mobile, headline takes the full width — left-anchor gradient becomes
-     a top-anchored gradient so the upper region is the darkest */
+  /* on mobile, headline takes the full width — top-anchored gradient so
+     the upper region stays readable while the lower video frame shows */
   .hero-tint {
     background:
       linear-gradient(180deg,
-        rgba(6,8,24,0.92) 0%,
-        rgba(8,10,28,0.80) 28%,
-        rgba(8,10,28,0.62) 60%,
-        rgba(8,10,28,0.80) 100%),
-      radial-gradient(ellipse at 28% 25%, rgba(33,187,215,0.26), transparent 65%),
-      radial-gradient(ellipse at 72% 80%, rgba(191,28,193,0.20), transparent 70%);
+        rgba(6,8,24,0.78) 0%,
+        rgba(8,10,28,0.62) 30%,
+        rgba(8,10,28,0.38) 65%,
+        rgba(8,10,28,0.60) 100%),
+      radial-gradient(ellipse at 28% 25%, rgba(33,187,215,0.22), transparent 65%),
+      radial-gradient(ellipse at 72% 80%, rgba(191,28,193,0.18), transparent 70%);
   }
 }
 
