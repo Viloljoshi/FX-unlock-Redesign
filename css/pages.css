@@ -387,39 +387,40 @@ body:has(.hero) > .stage-orb { display: none; }
   gap: clamp(48px, 8vw, 120px);
   width: 100%;
   max-width: 920px;
-  opacity: 0.85;
-  transition: opacity .25s;
+  /* Single grey ink tone for both wordmarks. The SVGs use currentColor
+     so every fill resolves to this single value — no green accents,
+     no black backgrounds, just one unified grey. */
+  color: var(--ink-mute);
+  opacity: 0.78;
+  transition: color .25s, opacity .25s;
 }
-.ic-partners-logos:hover { opacity: 1; }
+.ic-partners-logos:hover { opacity: 1; color: var(--ink); }
 
-/* Big partner cards. IC Markets is 1:1 (square), IC Trading is 2:1
-   (wide). Both share the same physical HEIGHT so they sit on a
-   common baseline; IC Trading just stretches wider naturally. */
+/* Big partner wordmarks (SVG; height-bound, width auto). Both share
+   the same physical HEIGHT so they sit on a common baseline. */
 .ic-logo {
   display: block;
   width: auto;
-  height: 120px;
+  height: 80px;
   max-width: 100%;
-  filter: grayscale(1);
-  border-radius: 14px;
   object-fit: contain;
 }
 @media (max-width: 1080px){
   .ic-partners { padding: 56px 0; }
-  .ic-logo { height: 96px; }
+  .ic-logo { height: 64px; }
   .ic-partners-logos { gap: clamp(32px, 6vw, 72px); }
   .ic-partners .wrap { gap: 36px; }
 }
 @media (max-width: 640px){
   .ic-partners { padding: 42px 0; }
-  .ic-logo { height: 72px; border-radius: 12px; }
+  .ic-logo { height: 52px; }
   .ic-partners-lbl { font-size: 12px; letter-spacing: 0.20em; }
   .ic-partners .wrap { gap: 28px; }
   .ic-partners-logos { gap: 24px; }
 }
 @media (max-width: 380px){
-  .ic-partners-logos { grid-template-columns: 1fr; gap: 22px; }
-  .ic-logo { height: 64px; }
+  .ic-partners-logos { grid-template-columns: 1fr; gap: 18px; }
+  .ic-logo { height: 44px; }
 }
 .brokers .lbl { text-align: center; margin-bottom: 26px; }
 .broker-logo { font-family: var(--display); font-weight: 600; font-size: 23px; letter-spacing: -0.02em; color: var(--ink); opacity: 0.42; transition: opacity .2s; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
