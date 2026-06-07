@@ -206,13 +206,15 @@
   </div>
 </header>
 
-<!-- ============ BROKER PARTNERS MARQUEE ============ -->
-<section class="brokers">
-  <div class="wrap">
-    <p class="eyebrow lbl" style="justify-content:center;display:flex">Our Broker Partners</p>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track" id="brokerTrack"></div>
+<!-- ============ PROUD PARTNERS · IC Markets + IC Trading ============ -->
+<section class="ic-partners" data-reveal>
+  <div class="wrap ic-partners-row">
+    <span class="ic-partners-lbl">Proud partners of</span>
+    <span class="ic-partners-logos">
+      <img src="assets/ic-markets-logo.png" alt="IC Markets" class="ic-logo" />
+      <span class="ic-partners-and">and</span>
+      <img src="assets/ic-trading-logo.svg" alt="IC Trading" class="ic-logo" />
+    </span>
   </div>
 </section>
 
@@ -521,16 +523,15 @@
       vol.innerHTML = bars;
     }
 
-    // broker marquee (IC Markets + IC Trading first)
-    const brokers = ["IC Markets", "IC Trading", "Pepperstone", "Vantage", "FP Markets", "Eightcap", "ThinkMarkets", "Axi"];
-    const bt = document.getElementById("brokerTrack");
-    const brokerHTML = brokers.map(b => `<span class="broker-logo"><span class="bdot"></span>${b}</span>`).join("");
-    bt.innerHTML = brokerHTML + brokerHTML;
+    // (broker marquee removed — replaced with static IC Markets / IC Trading section above)
 
+    // platforms marquee on the home "Trusted by" strip
     const platforms = ["IC Markets", "IC Trading", "Pepperstone", "Vantage", "FP Markets", "Eightcap"];
     const pt = document.getElementById("platformTrack");
-    const pHTML = platforms.map(b => `<span class="broker-logo"><span class="bdot"></span>${b}</span>`).join("");
-    pt.innerHTML = pHTML + pHTML;
+    if (pt) {
+      const pHTML = platforms.map(b => `<span class="broker-logo"><span class="bdot"></span>${b}</span>`).join("");
+      pt.innerHTML = pHTML + pHTML;
+    }
 
     // testimonials
     const T = [

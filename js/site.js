@@ -31,6 +31,11 @@
         <div class="nav-links">${links}</div>
         <div class="nav-cta">
           <a href="contact.html" class="btn btn-ghost hide-mobile">Log in</a>
+          <a href="https://wa.me/971585784483?text=${encodeURIComponent("Hi FX Unlocked — I'd like to learn more about your partner deals.")}"
+             target="_blank" rel="noopener"
+             class="btn btn-wa"
+             aria-label="WhatsApp +971 58 578 4483"
+             title="WhatsApp +971 58 578 4483">${window.icon ? icon("whatsapp") : "WA"}</a>
           <a href="affiliates-ibs.html" class="btn btn-primary">Apply now ${window.icon ? icon("arrow") : "→"}</a>
           <button class="nav-toggle btn btn-ghost" aria-label="Menu">☰</button>
         </div>
