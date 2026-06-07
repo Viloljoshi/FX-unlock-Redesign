@@ -392,19 +392,19 @@ body:has(.hero) > .stage-orb { display: none; }
 }
 .ic-partners-logos:hover { opacity: 1; }
 
-/* ORIGINAL brand PNGs from IC Markets / IC Trading. CSS-only
-   monochrome treatment: grayscale(1) flattens the green accent and
-   leaves both as the same black-card-with-white-letters silhouette.
-   The brand assets themselves are NOT modified. */
+/* Original brand PNGs (transparent background) — the green-letter
+   accent is flattened to grey via grayscale, and brightness drops the
+   pure-white wordmarks to a single mid-grey tone so both logos read
+   as flat grey marks. No card, no border, no background. */
 .ic-logo {
   display: block;
   width: auto;
   height: 100px;
   max-width: 100%;
   object-fit: contain;
-  border-radius: 14px;
-  filter: grayscale(1) contrast(1.05);
+  filter: grayscale(1) brightness(0.55) contrast(1.05);
 }
+.ic-partners-logos:hover .ic-logo { filter: grayscale(1) brightness(0.35) contrast(1.05); }
 @media (max-width: 1080px){
   .ic-partners { padding: 56px 0; }
   .ic-logo { height: 84px; }
