@@ -384,7 +384,9 @@ body:has(.hero) > .stage-orb { display: none; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center; justify-items: center;
-  gap: clamp(48px, 8vw, 120px);
+  /* tighter gap on desktop so both wordmarks sit closer together
+     and read as one paired callout */
+  gap: clamp(20px, 3vw, 56px);
   width: 100%;
   max-width: 920px;
   opacity: 0.85;
@@ -399,7 +401,7 @@ body:has(.hero) > .stage-orb { display: none; }
 .ic-logo {
   display: block;
   width: auto;
-  height: 100px;
+  height: 140px;             /* desktop showcase scale */
   max-width: 100%;
   object-fit: contain;
   filter: grayscale(1) brightness(0.55) contrast(1.05);
@@ -407,26 +409,26 @@ body:has(.hero) > .stage-orb { display: none; }
 .ic-partners-logos:hover .ic-logo { filter: grayscale(1) brightness(0.35) contrast(1.05); }
 @media (max-width: 1080px){
   .ic-partners { padding: 56px 0; }
-  .ic-logo { height: 84px; }
-  .ic-partners-logos { gap: clamp(32px, 6vw, 72px); }
+  .ic-logo { height: 116px; }
+  .ic-partners-logos { gap: clamp(18px, 3vw, 44px); }
   .ic-partners .wrap { gap: 36px; }
 }
 @media (max-width: 640px){
-  /* Stack vertically on phones — the 2:1 IC Trading card needs the
-     full row width to read at a useful size. */
+  /* Stack vertically on phones — 40% bigger than the old 72px so the
+     marks actually showcase. */
   .ic-partners { padding: 42px 0; }
   .ic-partners-logos {
     grid-template-columns: 1fr;
     gap: 22px;
-    max-width: 320px;
+    max-width: 360px;
   }
-  .ic-logo { height: 72px; }
+  .ic-logo { height: 100px; }
   .ic-partners-lbl { font-size: 12px; letter-spacing: 0.20em; }
   .ic-partners .wrap { gap: 28px; }
 }
 @media (max-width: 380px){
-  .ic-partners-logos { gap: 18px; }
-  .ic-logo { height: 64px; }
+  .ic-partners-logos { gap: 18px; max-width: 320px; }
+  .ic-logo { height: 90px; }
 }
 .brokers .lbl { text-align: center; margin-bottom: 26px; }
 .broker-logo { font-family: var(--display); font-weight: 600; font-size: 23px; letter-spacing: -0.02em; color: var(--ink); opacity: 0.42; transition: opacity .2s; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
