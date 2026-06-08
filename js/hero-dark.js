@@ -158,7 +158,21 @@
       const hist = seedHistory(base, SPARK_N);
       const spark = n.querySelector("[data-spark]");
       if (spark) spark.setAttribute("d", sparkPath(hist));
-      return { n, base, v: hist[hist.length - 1], vel: 0, dec, grp, hist, spark };
+      const s = { n, base, v: hist[hist.length - 1], vel: 0, dec, grp, hist, spark };
+      // live-feed.js fires "fxu:liveBase" when it has fresh real-world
+      // data — re-anchor our random walk to the new base so percentages
+      // and history all snap to the live value instead of drifting from
+      // the hard-coded fallback in the markup.
+      n.addEventListener("fxu:liveBase", (ev) => {
+        const newBase = ev.detail && ev.detail.price;
+        if (!newBase) return;
+        s.base = newBase;
+        s.v = newBase;
+        s.vel = 0;
+        s.hist = seedHistory(newBase, SPARK_N);
+        if (s.spark) s.spark.setAttribute("d", sparkPath(s.hist));
+      });
+      return s;
     });
     function step() {
       state.forEach((s) => {
