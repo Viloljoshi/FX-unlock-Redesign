@@ -239,11 +239,15 @@ body[data-page="home"] .hero .lead-ring.b { animation-delay: 1.1s; }
 body[data-page="home"] .hero .lead-core { animation: heroCoreGlow 2.2s ease-in-out infinite; }
 @keyframes heroCoreGlow { 50% { opacity: 0.75; } }
 
+/* Arrow glyph is locked to the chart-line tip (cx=690, cy=96) so it
+   stays perfectly centered inside the pulsing .lead-ring halo at all
+   times. Previously floated up 14px on a 6s loop, which drifted the
+   arrow OUT of its own halo and looked like a misalignment bug.
+   The lead-ring pulse + lead-core glow already provide motion at the
+   tip, so the arrow itself doesn't need translation. */
 body[data-page="home"] .hero .arrow-glyph {
-  animation: heroFloatY 6s ease-in-out infinite;
   transform-origin: center;
 }
-@keyframes heroFloatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 
 /* particles */
 body[data-page="home"] .hero .particle {
