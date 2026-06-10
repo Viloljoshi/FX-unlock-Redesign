@@ -215,6 +215,20 @@ body[data-page="home"] .hero .hero-visual {
 body[data-page="home"] .hero .hero-visual svg.flow {
   position: absolute; inset: 0;
   width: 100%; height: 100%; display: block; overflow: visible;
+  /* Fade-out mask on the right edge of the entire SVG visual.
+     The ribbons (r1/r2/r3) + chart line + area fill all drew paths
+     that ended at the right edge of the viewBox, creating a hard
+     vertical "wall" where every stroke stopped at once. The mask
+     dissolves the rightmost ~35% of the SVG so anything reaching
+     that zone naturally fades to transparent — no shared endpoint,
+     no wall. Also softens the top + bottom edges a touch for the
+     same reason. */
+  -webkit-mask-image: linear-gradient(to right,
+    black 0%, black 55%, rgba(0,0,0,0.6) 80%, transparent 100%);
+          mask-image: linear-gradient(to right,
+    black 0%, black 55%, rgba(0,0,0,0.6) 80%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
 }
 body[data-page="home"] .hero .plx {
   transition: transform .35s cubic-bezier(.2,.85,.25,1);
