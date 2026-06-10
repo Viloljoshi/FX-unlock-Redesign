@@ -163,13 +163,31 @@
               <circle class="lead-ring b" cx="690" cy="96" r="6" fill="none" stroke="#fff" stroke-width="1.4"/>
             </g>
 
-            <!-- sleek arrowhead at the glowing tip -->
+            <!-- Glowing arrowhead at the chart-line tip.
+                 Previous version had a crisp 1px white stroke + solid
+                 fill on top of the blurred bg, which read as a "hard
+                 cursor" diamond and felt stiff. Now: dominant blurred
+                 halo + a subtle 45%-opacity highlight + an alpha-mask
+                 that fades the right-tip edge to transparent so the
+                 arrow dissolves seamlessly into the background. -->
+            <defs>
+              <linearGradient id="arrowTipFade" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"  stop-color="#fff" stop-opacity="0.85"/>
+                <stop offset="55%" stop-color="#fff" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <mask id="arrowTipMask" maskUnits="userSpaceOnUse" x="-12" y="-14" width="32" height="28">
+                <rect x="-12" y="-14" width="32" height="28" fill="url(#arrowTipFade)"/>
+              </mask>
+            </defs>
             <g class="arrow-glyph">
-              <circle cx="690" cy="96" r="15" fill="url(#leadGlow)" opacity="0.85"/>
-              <g transform="translate(690 96) rotate(-47)">
-                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="url(#arrowFill)" filter="url(#heroSoft)" opacity="0.65"/>
-                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="url(#arrowFill)"/>
-                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="none" stroke="#fff" stroke-width="1" stroke-linejoin="round" opacity="0.9"/>
+              <!-- soft outer halo - dominant, dissolves outward -->
+              <circle cx="690" cy="96" r="18" fill="url(#leadGlow)" opacity="0.9"/>
+              <g transform="translate(690 96) rotate(-47)" mask="url(#arrowTipMask)">
+                <!-- wide blurred glow underneath -->
+                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="url(#arrowFill)" filter="url(#heroSoft)" opacity="0.75"/>
+                <!-- subtle solid highlight, no outline, lower opacity -->
+                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="url(#arrowFill)" opacity="0.45"/>
               </g>
             </g>
           </svg>
