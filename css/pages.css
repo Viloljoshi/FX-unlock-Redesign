@@ -761,25 +761,40 @@ body:has(.hero) > .stage-orb { display: none; }
 @media (max-width: 920px){ .tool-row, .tool-row.flip { grid-template-columns: 1fr; gap: 32px; } .tool-row.flip .tool-visual { order: 0; } }
 .tool-visual { position: relative; border-radius: var(--r-l); overflow: hidden; min-height: clamp(340px, 34vw, 420px); background: linear-gradient(160deg, #fff, var(--bg-soft)); border: 1px solid var(--line); box-shadow: var(--sh-md); padding: 28px; }
 
-/* === Real product screenshots ===
-   When .tool-row has the .tool-row--shot modifier (set in markup),
-   collapse to a SINGLE column with the image BELOW the text so the
-   2.6:1 product screenshots get the full container width and read
-   at ~1280x490 instead of cramped 700x267 inside a half-width cell.
-   Uses an explicit class (not :has()) so it's robust across older
-   browsers + stale caches. */
-.tool-row.tool-row--shot { grid-template-columns: minmax(0, 1fr); }
-.tool-row.tool-row--shot .tool-visual { order: 2; }
-.tool-row.tool-row--shot.flip .tool-visual { order: 2; }
+/* === Real product screenshots — side-by-side alternating layout ===
+   The new captures (~1.1:1) work cleanly in a half-width cell, so we
+   keep the original 2-column .tool-row grid and let .flip control the
+   alternation. Tool 1 (no flip) → text L / shot R.
+   Tool 2 (.flip)               → shot L / text R.
+   Tool 3 (no flip)             → text L / shot R.
+   Previous override forced single-column for 2.6:1 banners that have
+   since been swapped out. */
+.tool-row.tool-row--shot { /* inherits the base 2-col grid from .tool-row */ }
+.tool-row.tool-row--shot.flip .tool-visual { order: 0; }
 
 .tool-visual.tool-visual--shot {
+  /* Allow it to grow with the screenshot rather than the rigid 340px
+     minimum used for placeholder visuals. */
   min-height: 0;
-  padding: 16px;
-  background: var(--dark);
-  border: 1px solid var(--dark-line);
+  /* Removed the dark wrapper (was background: var(--dark) + 1px dark
+     border + 16px padding). The new screenshots are full-bleed product
+     UI captures that already have their own chrome — wrapping them in
+     a black frame made them look stuck inside a tablet bezel against
+     the light page bg. They now float cleanly with just a soft shadow
+     applied to the IMAGE itself (see .tool-screenshot below). */
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  align-self: center;
+}
+/* Shadow now lives on the image so the rounded corners + shadow track
+   the screenshot itself, not an outer card. */
+.tool-visual.tool-visual--shot .tool-screenshot {
+  border-radius: var(--r-l);
   box-shadow:
-    0 30px 80px -28px rgba(20,22,46,0.45),
-    0 60px 140px -60px rgba(191,28,193,0.18);
+    0 30px 80px -28px rgba(20,22,46,0.35),
+    0 60px 140px -60px rgba(191,28,193,0.14);
 }
 .tool-screenshot {
   display: block;

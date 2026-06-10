@@ -10,9 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="assets/fx-icon.svg" />
 <meta name="ext-resource-dependency" content="assets/fx-icon.svg" data-resource-id="logo" />
-<link rel="stylesheet" href="css/site.css?v=202606091230" />
-<link rel="stylesheet" href="css/pages.css?v=202606091230" />
-<link rel="stylesheet" href="css/hero-dark.css?v=202606091230" />
+<link rel="stylesheet" href="css/site.css?v=202606101030" />
+<link rel="stylesheet" href="css/pages.css?v=202606101030" />
+<link rel="stylesheet" href="css/hero-dark.css?v=202606101030" />
 <template id="__bundler_thumbnail" data-bg-color="#f4f3f9">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -163,32 +163,21 @@
               <circle class="lead-ring b" cx="690" cy="96" r="6" fill="none" stroke="#fff" stroke-width="1.4"/>
             </g>
 
-            <!-- Glowing arrowhead at the chart-line tip.
-                 Previous version had a crisp 1px white stroke + solid
-                 fill on top of the blurred bg, which read as a "hard
-                 cursor" diamond and felt stiff. Now: dominant blurred
-                 halo + a subtle 45%-opacity highlight + an alpha-mask
-                 that fades the right-tip edge to transparent so the
-                 arrow dissolves seamlessly into the background. -->
-            <defs>
-              <linearGradient id="arrowTipFade" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%"  stop-color="#fff" stop-opacity="0.85"/>
-                <stop offset="55%" stop-color="#fff" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-              </linearGradient>
-              <mask id="arrowTipMask" maskUnits="userSpaceOnUse" x="-12" y="-14" width="32" height="28">
-                <rect x="-12" y="-14" width="32" height="28" fill="url(#arrowTipFade)"/>
-              </mask>
-            </defs>
+            <!-- Soft glowing tip — no arrow SHAPE.
+                 Earlier we had a diamond arrowhead at the chart-line
+                 tip; even softened, the shape still read as a hard
+                 endpoint. The ribbons (r1/r2/r3) and the chart line
+                 itself end smoothly via stop-opacity=0 in their
+                 gradients, so we match that behaviour here: kill the
+                 diamond entirely. What's left is a dual-layer radial
+                 halo that the existing line-end fade dissolves into,
+                 plus the .lead-ring pulse + .lead-core glow already
+                 below. Reads as a glowing dissolve, no endpoint. -->
             <g class="arrow-glyph">
-              <!-- soft outer halo - dominant, dissolves outward -->
-              <circle cx="690" cy="96" r="18" fill="url(#leadGlow)" opacity="0.9"/>
-              <g transform="translate(690 96) rotate(-47)" mask="url(#arrowTipMask)">
-                <!-- wide blurred glow underneath -->
-                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="url(#arrowFill)" filter="url(#heroSoft)" opacity="0.75"/>
-                <!-- subtle solid highlight, no outline, lower opacity -->
-                <path d="M17 0 L-11 -12.5 L-3 0 L-11 12.5 Z" fill="url(#arrowFill)" opacity="0.45"/>
-              </g>
+              <!-- wider outer wash dissolves into the bg -->
+              <circle cx="690" cy="96" r="32" fill="url(#leadGlow)" opacity="0.45"/>
+              <!-- inner brighter glow at the tip -->
+              <circle cx="690" cy="96" r="14" fill="url(#leadGlow)" opacity="0.9"/>
             </g>
           </svg>
 
