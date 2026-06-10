@@ -180,13 +180,16 @@
     });
     function step() {
       state.forEach((s) => {
-        // Velocity perturbation 0.0008 → 0.00012 (≈7x calmer) and
-        // clamp tightened from ±1.5%/+2% to ±0.15% so the chip's price
-        // can only drift a few last-decimal digits away from the live
-        // base. The percent badge therefore stays near the real-world
-        // 24h change rather than flipping +/- every few ticks.
-        s.vel = s.vel * 0.9 + (Math.random() - 0.5) * (s.base * 0.00012);
-        s.v = Math.max(s.base * 0.9985, Math.min(s.base * 1.0015, s.v + s.vel));
+        // Drift dialled way down per client feedback — prices should
+        // barely move on screen. For XAU at ~$4170 these values mean:
+        //   max per-step delta:    ±$0.10
+        //   total drift range:     ±$2 (±0.05% of base)
+        //   tick interval:         3.5s
+        // That reads as "alive but stable" — the last decimal nudges,
+        // the sparkline breathes a touch, but the headline number
+        // never visibly runs up and down.
+        s.vel = s.vel * 0.9 + (Math.random() - 0.5) * (s.base * 0.00004);
+        s.v = Math.max(s.base * 0.9995, Math.min(s.base * 1.0005, s.v + s.vel));
         s.hist.push(s.v);
         if (s.hist.length > SPARK_N) s.hist.shift();
         const valEl = s.n.querySelector("[data-tk-val]");
@@ -196,7 +199,7 @@
         if (s.spark) s.spark.setAttribute("d", sparkPath(s.hist));
       });
     }
-    setInterval(step, 2200);
+    setInterval(step, 3500);
   })();
 
   /* -- particles -- */
