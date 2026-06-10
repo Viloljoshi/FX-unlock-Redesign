@@ -10,7 +10,10 @@
   svg.dataset.mounted = "1";
 
   // Equirectangular projection helpers
-  const W = 1200, H = 620;
+  // Canvas 1200×800 (3:2 aspect) — matches .map-inline-stage / .map-stage
+  // CSS. Was 1200×620 (~1.94:1) which read as a letterboxed strip; the
+  // new ratio gives continents and arcs better vertical breathing.
+  const W = 1200, H = 800;
   const proj = (lon, lat) => [
     (lon + 180) / 360 * W,
     (90 - lat) / 180 * H
@@ -109,13 +112,17 @@
   starsEl.innerHTML = stars.join("");
 
   // -- Cities --------------------------------------------------
+  // Country offices — Sydney dropped per client direction; added São Paulo
+  // and Mexico City to anchor the LATAM corridor that's increasingly the
+  // growth region for FX partner programs.
   const cities = [
-    { id: "dubai",    name: "Dubai",     role: "Headquarters", lat: 25.2,  lon: 55.3,  hq: true },
-    { id: "london",   name: "London",    role: "EMEA",         lat: 51.5,  lon: -0.1 },
-    { id: "limassol", name: "Limassol",  role: "EU",           lat: 34.7,  lon: 33.0 },
-    { id: "cape",     name: "Cape Town", role: "Africa",       lat: -33.9, lon: 18.4 },
-    { id: "sing",     name: "Singapore", role: "APAC",         lat: 1.3,   lon: 103.8 },
-    { id: "syd",      name: "Sydney",    role: "ANZ",          lat: -33.9, lon: 151.2 },
+    { id: "dubai",    name: "Dubai",       role: "Headquarters",  lat: 25.2,  lon: 55.3,  hq: true },
+    { id: "london",   name: "London",      role: "EMEA",          lat: 51.5,  lon: -0.1 },
+    { id: "limassol", name: "Limassol",    role: "EU",            lat: 34.7,  lon: 33.0 },
+    { id: "mexico",   name: "Mexico City", role: "LATAM North",   lat: 19.4,  lon: -99.1 },
+    { id: "sao",      name: "São Paulo",   role: "LATAM South",   lat: -23.5, lon: -46.6 },
+    { id: "cape",     name: "Cape Town",   role: "Africa",        lat: -33.9, lon: 18.4 },
+    { id: "sing",     name: "Singapore",   role: "APAC",          lat: 1.3,   lon: 103.8 },
   ];
   cities.forEach(c => { const [x,y] = proj(c.lon, c.lat); c.x = x; c.y = y; });
 

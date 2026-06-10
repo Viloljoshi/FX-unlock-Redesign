@@ -147,27 +147,14 @@
     window.__fxReveal = { observe };
   }
 
-  /* ---- Live ticker (hero) ---- */
-  function startTicker() {
-    document.querySelectorAll("[data-ticker]").forEach((el) => {
-      const base = parseFloat(el.dataset.base);
-      const dec = base < 10 ? 5 : 2;
-      let cur = base;
-      const valEl = el.querySelector("[data-tk-val]");
-      const dEl = el.querySelector("[data-tk-d]");
-      setInterval(() => {
-        const d = (Math.random() - 0.48) * 2 * 0.0007 * base;
-        cur = Math.max(base * 0.985, Math.min(base * 1.015, cur + d));
-        const up = d >= 0;
-        if (valEl) valEl.textContent = cur.toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
-        if (dEl) {
-          const pct = ((cur - base) / base) * 100;
-          dEl.textContent = (pct >= 0 ? "▲ +" : "▼ ") + pct.toFixed(2) + "%";
-          dEl.className = "delta " + (pct >= 0 ? "pos" : "neg");
-        }
-      }, 1500);
-    });
-  }
+  /* ---- Live ticker (REMOVED) ----
+     A legacy ticker simulator used to live here. It wrote the chip
+     price, the 24h % badge, and replaced data-tk-d's className
+     completely — fighting with both live-feed.js (real prices from
+     freecurrencyapi + apised) and hero-dark.js (gentle drift sim).
+     With three writers on the same DOM, the visible value reverted
+     to whatever this function wrote last — usually "▲ +0.00%" because
+     the live API value made `cur` start equal to `base`. Killed. */
 
   /* ---- Counter animation ---- */
   function animateCounters() {
@@ -260,7 +247,6 @@
     mountIcons();
     mountMagneticButtons();
     scrollReveal();
-    startTicker();
     animateCounters();
     initAccordion();
     initTabs();

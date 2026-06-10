@@ -28,9 +28,9 @@
   const APISED_KEY = "sk_c2CfFf70b2Be811B898eeBDc40eC6599a215ED29b75aE55B";
 
   const FCA_CACHE = "fxu_live_rates_v1";
-  const GOLD_CACHE = "fxu_gold_v2"; // v2 — invalidate any stale v1 cache
+  const GOLD_CACHE = "fxu_gold_v3"; // v3 — invalidate any stale v1/v2 caches
   const FCA_TTL  = 30 * 60 * 1000;  // 30 min for fiat (low volatility)
-  const GOLD_TTL = 5 * 60 * 1000;   // 5 min for gold (much higher volatility)
+  const GOLD_TTL = 2 * 60 * 1000;   // 2 min for gold (very high volatility)
 
   // Chip pair -> fiat ISO code understood by freecurrencyapi.
   // (base is USD; we invert below where the chip quote is /USD.)
@@ -173,11 +173,19 @@
     refreshGold();
   }
 
-  // Mount on home only (the hero with chips lives there)
+  // Mount on home only (the hero with chips lives there).
+  // Hard-reset cooldown: clear the in-memory "last refresh" timestamp on
+  // boot so the FIRST visible page always hits live data (the cache
+  // itself prevents repeat network hits within TTL).
   if (document.body && document.body.dataset.page === "home") {
     refresh();
-    // The cache itself blocks most network hits; this just keeps long
-    // sessions current.
-    setInterval(refresh, 15 * 60 * 1000);
+    // Background tick to keep long-lived sessions current.
+    setInterval(refresh, 3 * 60 * 1000);
+    // When the user comes back to the tab after being away, force a
+    // refresh — that's typically when the displayed price is most
+    // visibly stale and the user is most likely to notice.
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") refresh();
+    });
   }
 })();
