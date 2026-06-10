@@ -1,0 +1,18 @@
+{
+  "name": "fxunlockmain-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FX Unlocked marketing site — static HTML/CSS/JS served by a tiny Express app that also captures contact-form leads to Postgres.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "pg": "^8.13.1"
+  }
+}

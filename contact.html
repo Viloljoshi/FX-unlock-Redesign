@@ -65,26 +65,31 @@
     <div class="card glass" data-reveal data-reveal-delay="1">
       <h3 class="h3" style="margin-bottom:6px">Tell us about your business</h3>
       <p class="small" style="margin-bottom:24px">We respond within 24 hours.</p>
-      <form id="contactForm" onsubmit="return false">
-        <div class="field"><label>Full name <span class="req">*</span></label><input type="text" placeholder="Jane Doe" required /></div>
+      <form id="contactForm" novalidate>
+        <!-- Honeypot — bots fill hidden inputs, real users don't. Server
+             silently 200s any submission that has this filled in. -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+          <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <div class="field"><label>Full name <span class="req">*</span></label><input type="text" name="name" placeholder="Jane Doe" required /></div>
         <div class="form-row">
-          <div class="field"><label>Email address <span class="req">*</span></label><input type="email" placeholder="you@email.com" required /></div>
-          <div class="field"><label>Phone number including country code <span class="req">*</span></label><input type="text" placeholder="+971 ..." required /></div>
+          <div class="field"><label>Email address <span class="req">*</span></label><input type="email" name="email" placeholder="you@email.com" required /></div>
+          <div class="field"><label>Phone number including country code <span class="req">*</span></label><input type="text" name="phone" placeholder="+971 ..." required /></div>
         </div>
         <div class="form-row">
           <div class="field"><label>Country <span class="req">*</span></label>
-            <select required><option value="" hidden>Select</option><option>United Arab Emirates</option><option>United Kingdom</option><option>United States</option><option>Singapore</option><option>Germany</option><option>Nigeria</option><option>Australia</option><option>Other</option></select>
+            <select name="country" required><option value="" hidden>Select</option><option>United Arab Emirates</option><option>United Kingdom</option><option>United States</option><option>Singapore</option><option>Germany</option><option>Nigeria</option><option>Australia</option><option>Other</option></select>
           </div>
           <div class="field"><label>I am a… <span class="req">*</span></label>
-            <select required><option value="" hidden>Select</option><option>Affiliate</option><option>Introducing Broker (IB)</option><option>Trading Platform or Broker</option></select>
+            <select name="user_type" required><option value="" hidden>Select</option><option>Affiliate</option><option>Introducing Broker (IB)</option><option>Trading Platform or Broker</option></select>
           </div>
         </div>
-        <div class="field"><label>Tell us about your business</label><textarea placeholder="Audience size, current deal, what you're looking for"></textarea></div>
+        <div class="field"><label>Tell us about your business</label><textarea name="business_message" placeholder="Audience size, current deal, what you're looking for"></textarea></div>
         <div class="field"><label>How did you hear about us?</label>
-          <select><option value="" hidden>Select</option><option>Social media</option><option>Google</option><option>Referral</option><option>Event</option><option>Other</option></select>
+          <select name="heard_from"><option value="" hidden>Select</option><option>Social media</option><option>Google</option><option>Referral</option><option>Event</option><option>Other</option></select>
         </div>
-        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:6px">Send Message <span class="ar" data-icon="arrow"></span></button>
-        <p class="small center" id="formMsg" style="margin-top:14px;display:none;color:var(--pos)">Thanks. We'll be in touch within 24 hours.</p>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:6px" id="contactSubmit">Send Message <span class="ar" data-icon="arrow"></span></button>
+        <p class="small center" id="formMsg" style="margin-top:14px;display:none">Thanks. We'll be in touch within 24 hours.</p>
       </form>
     </div>
   </div>
@@ -94,11 +99,55 @@
 <script src="js/site.js"></script>
 <script>
 window.addEventListener("DOMContentLoaded", () => {
-  const f = document.getElementById("contactForm");
-  f.addEventListener("submit", () => {
-    const msg = document.getElementById("formMsg");
+  const form = document.getElementById("contactForm");
+  const msg  = document.getElementById("formMsg");
+  const btn  = document.getElementById("contactSubmit");
+  if (!form || !msg || !btn) return;
+
+  const ORIGINAL_LABEL = btn.innerHTML;
+
+  function showMessage(text, ok) {
+    msg.textContent = text;
+    msg.style.color = ok ? "var(--pos)" : "var(--neg, #ff6b6b)";
     msg.style.display = "block";
-    f.querySelectorAll("input,select,textarea").forEach(x=>x.value="");
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.style.display = "none";
+    btn.disabled = true;
+    btn.innerHTML = "Sending…";
+
+    // Native required-field check first so we surface the same UX as
+    // before for empty fields, without round-tripping to the server.
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      btn.disabled = false;
+      btn.innerHTML = ORIGINAL_LABEL;
+      return;
+    }
+
+    const fd = new FormData(form);
+    const payload = Object.fromEntries(fd.entries());
+    payload.source_page = location.pathname || "/contact";
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Submission failed. Please try again.");
+
+      showMessage("Thanks. We'll be in touch within 24 hours.", true);
+      form.reset();
+    } catch (err) {
+      showMessage(err.message || "Something went wrong. Please try again.", false);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = ORIGINAL_LABEL;
+    }
   });
 });
 </script>
