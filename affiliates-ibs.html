@@ -11,8 +11,8 @@
 <link rel="icon" type="image/svg+xml" href="assets/fx-icon.svg" />
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon-256.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-apple.png" />
-<link rel="stylesheet" href="css/site.css?v=202606111015" />
-<link rel="stylesheet" href="css/pages.css?v=202606111015" />
+<link rel="stylesheet" href="css/site.css?v=202606111100" />
+<link rel="stylesheet" href="css/pages.css?v=202606111100" />
 </head>
 <body data-page="affiliates">
 
@@ -157,9 +157,9 @@
   </div>
 </section>
 
-<script src="js/icons.js?v=202606111015"></script>
-<script src="js/site.js?v=202606111015"></script>
-<script src="js/aurora-banner.js?v=202606111015" defer></script>
+<script src="js/icons.js?v=202606111100"></script>
+<script src="js/site.js?v=202606111100"></script>
+<script src="js/aurora-banner.js?v=202606111100" defer></script>
 <script>
 window.addEventListener("DOMContentLoaded", () => {
   const diffs = [
@@ -171,8 +171,11 @@ window.addEventListener("DOMContentLoaded", () => {
     ["review","Bi-Monthly Reviews &amp; Half-Yearly Growth Audits","We schedule a fortnightly call with every active partner to review what's working. Every six months we conduct a full growth audit: your content, your traffic, your conversion rate, and your revenue. We give you a written action plan with specific recommendations. This isn't a box-ticking exercise. It's how we make sure every partner is on an upward trajectory."],
     ["manager","Dedicated Regional Country Managers","You'll have a named contact in your region who understands your local market, the regulatory environment, and the broker landscape where you operate. Not a helpdesk. A person."],
   ];
+  // Cascade delays cycle 0/.12/.24/.36s through the 2-col grid so each
+  // card sweeps in sequentially as its row scrolls into view — left
+  // leads, right trails, the next row continues the wave.
   document.getElementById("diffGrid").innerHTML = diffs.map((d,i)=>`
-    <div class="benefit" data-reveal data-reveal-delay="${i%2?1:0}">
+    <div class="benefit" data-reveal data-reveal-delay="${i%4}">
       <div class="icon-tile" >${icon(d[0])}</div>
       <h4 class="h4">${d[1]}</h4>
       <p class="body">${d[2]}</p>
@@ -200,10 +203,11 @@ window.addEventListener("DOMContentLoaded", () => {
       if (!open) item.classList.add("open");
     });
   });
-  // reveal injected
-  document.querySelectorAll("#diffGrid [data-reveal]").forEach(e=>{
-    new IntersectionObserver((ents,o)=>ents.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in");o.unobserve(en.target);}}),{threshold:0.1}).observe(e);
-  });
+  // Injected [data-reveal] cards are auto-observed by site.js's
+  // MutationObserver (scrollReveal), which uses the shared
+  // rootMargin so reveals fire when cards are genuinely in view.
+  // The old duplicate per-page observer fired earlier (threshold
+  // 0.1, no rootMargin) and undercut the animation timing.
 });
 </script>
 </body>

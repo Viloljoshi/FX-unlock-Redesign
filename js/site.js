@@ -138,10 +138,18 @@
     });
     mo.observe(document.body, { childList: true, subtree: true });
 
-    // Safety: nothing should ever stay invisible. Re-query at fire time so
-    // dynamically-injected nodes get the .in class too (covers reduced-motion
-    // fallbacks, capture harnesses, and pages that inject content very late).
-    setTimeout(() => document.querySelectorAll("[data-reveal]:not(.in)").forEach((e) => e.classList.add("in")), 2200);
+    // Safety: nothing visible should ever stay invisible — but ONLY for
+    // elements currently inside the viewport. The previous blanket version
+    // revealed EVERYTHING after 2.2s, including below-the-fold sections,
+    // which killed all scroll-triggered animations (cards were already
+    // .in long before the user scrolled to them). Below-fold elements now
+    // stay hidden until their IntersectionObserver fires on scroll.
+    setTimeout(() => {
+      document.querySelectorAll("[data-reveal]:not(.in)").forEach((e) => {
+        const r = e.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) e.classList.add("in");
+      });
+    }, 2200);
 
     // Expose for page scripts that want to opt in explicitly.
     window.__fxReveal = { observe };
