@@ -11,8 +11,8 @@
 <link rel="icon" type="image/svg+xml" href="assets/fx-icon.svg" />
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon-256.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-apple.png" />
-<link rel="stylesheet" href="css/site.css?v=202606101700" />
-<link rel="stylesheet" href="css/pages.css?v=202606101700" />
+<link rel="stylesheet" href="css/site.css?v=202606101730" />
+<link rel="stylesheet" href="css/pages.css?v=202606101730" />
 </head>
 <body data-page="affiliates">
 
@@ -114,12 +114,6 @@
   </div>
 </section>
 
-<!-- PLATFORM LOGOS -->
-<section class="section tight">
-  <div class="wrap"><div class="sec-head center" data-reveal><h2 class="h3" style="font-weight:600">Our platform partners</h2></div></div>
-  <div class="marquee"><div class="marquee-track" id="platformTrack"></div></div>
-</section>
-
 <!-- CTA -->
 <section class="section">
   <div class="wrap">
@@ -144,8 +138,8 @@
   </div>
 </section>
 
-<script src="js/icons.js?v=202606101700"></script>
-<script src="js/site.js?v=202606101700"></script>
+<script src="js/icons.js?v=202606101730"></script>
+<script src="js/site.js?v=202606101730"></script>
 <script>
 window.addEventListener("DOMContentLoaded", () => {
   const diffs = [
@@ -176,11 +170,6 @@ window.addEventListener("DOMContentLoaded", () => {
       <button class="acc-head"><h4>${f[0]}</h4><span class="acc-icon">${icon("plus")}</span></button>
       <div class="acc-body"><p class="body">${f[1]}</p></div>
     </div>`).join("");
-
-  const platforms = ["IC Markets","IC Trading","Pepperstone","Vantage","FP Markets","Eightcap"];
-  const pt = document.getElementById("platformTrack");
-  const pHTML = platforms.map(b=>`<span class="broker-logo"><span class="bdot"></span>${b}</span>`).join("");
-  pt.innerHTML = pHTML + pHTML;
 
   // re-init accordion for injected items
   document.querySelectorAll("[data-accordion] .acc-item").forEach((item) => {
