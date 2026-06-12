@@ -72,7 +72,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 html, body { margin: 0; padding: 0; }
 body {
   font-family: var(--sans);
@@ -80,7 +80,15 @@ body {
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Mobile: stop the page panning sideways on an accidental swipe.
+     overflow-x:hidden must be on BOTH html and body — on body alone iOS
+     Safari still lets the visual viewport pan. The hero aurora ribbons,
+     blobs and stage orbs are positioned ~2000px wide beyond the viewport;
+     clipping at the document edge stops them being scrolled to.
+     overscroll-behavior-x:none kills the horizontal rubber-band that made
+     the side-scroll feel "sensitive". */
   overflow-x: hidden;
+  overscroll-behavior-x: none;
   line-height: 1.5;
 }
 a { color: inherit; text-decoration: none; }

@@ -146,6 +146,12 @@ app.post("/api/leads", leadLimiter, async (req, res) => {
   }
 });
 
+// ---------- Clean home URL ----------
+// The homepage should read as the bare root "/", not "/index.html".
+// Redirect any direct hit on /index.html or /index to / so the URL bar
+// never shows "/index". (Nav + logo links already point at "./".)
+app.get(["/index.html", "/index"], (req, res) => res.redirect(301, "/"));
+
 // ---------- Static files ----------
 // All HTML/CSS/JS/images live at the repo root. Long cache for assets,
 // short cache for HTML so deploys feel instant.
